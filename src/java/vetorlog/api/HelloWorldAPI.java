@@ -4,9 +4,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 //@Api(value = "Hello World")
-@Path("hello")
 //@RequestScoped
 //@Log4j2
+@Path("hello")
 public class HelloWorldAPI {
 //    @ApiOperation(value = "testando",produces = MediaType.TEXT_PLAIN)
     @GET

@@ -1,9 +1,11 @@
 package vetorlog.jersey;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+
 import javax.ws.rs.ApplicationPath;
 
-//@ApplicationPath("api")
+@ApplicationPath("/")
 public class App extends ResourceConfig {
     public App() {
 //        register(RequestInterceptor.class);
@@ -13,6 +15,7 @@ public class App extends ResourceConfig {
 //        register(ExceptionInterceptor.class);
 
         packages("vetorlog.api;"); //com.wordnik.swagger.jaxrs.listing;
+        property(ServerProperties.TRACING, "ALL");
 
 //        BeanConfig beanConfig = new BeanConfig();
 //        beanConfig.setTitle("Boomb");

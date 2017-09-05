@@ -1,7 +1,7 @@
 .idea
 new-econometer.iml
 target/
-lib/
 
 src/web/META-INF
 src/web/WEB-INF
+.gitignore
