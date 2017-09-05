@@ -3,3 +3,5 @@ new-econometer.iml
 target/
 lib/
 
+web/META-INF
+web/WEB-INF
