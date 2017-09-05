@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+
         <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
         <maven-surefile-plugin.version>2.20</maven-surefile-plugin.version>
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
@@ -20,7 +21,10 @@
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
         <junit.jupiter.version>5.0.0-RC3</junit.jupiter.version>
 
-        <log4j>2.9.0</log4j>
+        <log4j.version>2.9.0</log4j.version>
+
+        <jaxrs.jersey.version>2.25.1</jaxrs.jersey.version>
+        <jaxrs.version>2.1</jaxrs.version>
     </properties>
 
     <build>
@@ -68,17 +72,19 @@
 
     <!-- Dependências do projeto -->
     <dependencies>
+        <!-- Logging: Log4j 2 -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j}</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j}</version>
+            <version>${log4j.version}</version>
         </dependency>
 
+        <!-- Testes: JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -90,6 +96,28 @@
             <artifactId>junit-platform-runner</artifactId>
             <version>${junit.platform.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- REST JaxRS: Jersey 2 -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${jaxrs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>${jaxrs.jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jaxrs.jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jaxrs.jersey.version}</version>
         </dependency>
     </dependencies>
 </project>
