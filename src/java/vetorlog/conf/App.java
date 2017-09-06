@@ -1,4 +1,4 @@
-package vetorlog.jersey;
+package vetorlog.conf;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;

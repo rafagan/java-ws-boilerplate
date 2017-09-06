@@ -9,23 +9,29 @@
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <!-- Variáveis globais -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
 
+        <!-- Maven -->
         <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
         <maven-surefile-plugin.version>2.20</maven-surefile-plugin.version>
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 
+        <!-- Java EE -->
+        <javax.servlet.version>4.0.0</javax.servlet.version>
+        <jaxrs.version>2.1</jaxrs.version>
+        <javax.persistence.version>2.2.0</javax.persistence.version>
+
+        <!-- Third Party Apps -->
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
         <junit.jupiter.version>5.0.0-RC3</junit.jupiter.version>
-
         <log4j.version>2.9.0</log4j.version>
-
-        <javax.servlet.version>4.0.0</javax.servlet.version>
         <jaxrs.jersey.version>2.25.1</jaxrs.jersey.version>
-        <jaxrs.version>2.1</jaxrs.version>
+        <hibernate.version>5.2.10.Final</hibernate.version>
+        <lombok.version>1.16.18</lombok.version>
+        <google.guice.version>3.0</google.guice.version>
+        <mysql.version>8.0.7-dmr</mysql.version>
     </properties>
 
     <dependencyManagement>
@@ -150,5 +156,44 @@
             <artifactId>jersey-client</artifactId>
             <version>${jaxrs.jersey.version}</version>
         </dependency>
+
+        <!-- JPA/JPQL: Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>${javax.persistence.version}</version>
+        </dependency>
+
+        <!-- Database: MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- Lombok para boilerplate -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <!-- Dependency injection -->
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${google.guice.version}</version>
+        </dependency>
+
     </dependencies>
 </project>
