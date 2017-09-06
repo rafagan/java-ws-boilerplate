@@ -22,6 +22,7 @@
         <javax.servlet.version>4.0.0</javax.servlet.version>
         <jaxrs.version>2.1</jaxrs.version>
         <javax.persistence.version>2.2.0</javax.persistence.version>
+        <javax.ejb.version>3.2</javax.ejb.version>
 
         <!-- Third Party Apps -->
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
@@ -111,7 +112,7 @@
             <version>${log4j.version}</version>
         </dependency>
 
-        <!-- Testes: JUnit -->
+        <!-- Unit Tests: JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -176,18 +177,18 @@
             <version>${mysql.version}</version>
         </dependency>
 
-        <!-- Lombok para boilerplate -->
+        <!-- Boilerplate: Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
 
-        <!-- Dependency injection -->
+        <!-- Dependency injection: Guice -->
         <dependency>
             <groupId>javax.ejb</groupId>
             <artifactId>javax.ejb-api</artifactId>
-            <version>3.2</version>
+            <version>${javax.ejb.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
