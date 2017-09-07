@@ -43,8 +43,7 @@ public class DatabaseManager {
                 default:
                     log.warn("Choosing persistence_unit=default. Please, set DatabaseManager.ENVIRONMENT with " +
                             "one of AppEnvironment enum values.");
-                    WrapperResourceLocal.startFactory("default");
-                    em = new WrapperResourceLocal().getEntityManager();
+                    em = new WrapperDefault().getEntityManager();
             }
         return em;
     }

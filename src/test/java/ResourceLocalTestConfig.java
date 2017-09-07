@@ -2,7 +2,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import vetorlog.model.util.relational.DatabaseManager;
-import vetorlog.model.util.relational.WrapperResourceLocal;
+import vetorlog.model.util.relational.WrapperDefault;
 
 class ResourceLocalTestConfig {
     protected DatabaseManager dbManager;
@@ -21,6 +21,6 @@ class ResourceLocalTestConfig {
 
     @AfterAll
     static void closeFactory() {
-        WrapperResourceLocal.closeFactory();
+        WrapperDefault.closeFactory();
     }
 }
