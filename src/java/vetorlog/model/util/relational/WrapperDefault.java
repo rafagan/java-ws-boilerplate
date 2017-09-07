@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WrapperDefault implements IEntityManagerWrapper {
-    private static EntityManagerFactory factory;
+    public static EntityManagerFactory factory;
     private EntityManager em;
 
     private static void startFactory() {

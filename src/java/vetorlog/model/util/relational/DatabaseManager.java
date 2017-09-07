@@ -3,7 +3,8 @@ package vetorlog.model.util.relational;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import vetorlog.conf.AppEnvironment;
+import vetorlog.conf.EnvironmentType;
+import vetorlog.conf.PersistenceContextType;
 import vetorlog.model.prototype.Model;
 
 import javax.persistence.EntityManager;
@@ -17,7 +18,8 @@ import java.util.Map;
 @NoArgsConstructor
 @Log4j2
 public class DatabaseManager {
-    public static AppEnvironment ENVIRONMENT = AppEnvironment.UNDEFINED;
+    public static EnvironmentType ENVIRONMENT = EnvironmentType.UNDEFINED;
+    public static PersistenceContextType CONTEXT = PersistenceContextType.RESOURCE_LOCAL;
     private EntityManager em;
 
     private <T> boolean hasValidId(T id) {
@@ -42,7 +44,7 @@ public class DatabaseManager {
                     em = new WrapperProduction().getEntityManager();
                 default:
                     log.warn("Choosing persistence_unit=default. Please, set DatabaseManager.ENVIRONMENT with " +
-                            "one of AppEnvironment enum values.");
+                            "one of EnvironmentType enum values.");
                     em = new WrapperDefault().getEntityManager();
             }
         return em;

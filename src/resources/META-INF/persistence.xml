@@ -54,11 +54,11 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="myqsl_staging">
+    <persistence-unit name="myqsl_staging" transaction-type="JTA">
         <description>MySQL staging configuration</description>
     </persistence-unit>
 
-    <persistence-unit name="myqsl_production">
+    <persistence-unit name="myqsl_production" transaction-type="JTA">
         <description>MySQL production configuration</description>
     </persistence-unit>
 </persistence>

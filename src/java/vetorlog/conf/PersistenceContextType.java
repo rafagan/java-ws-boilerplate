@@ -1,14 +1,12 @@
 package vetorlog.conf;
 
-public enum AppEnvironment {
-    LOCAL ("local"),
-    STAGING ("staging"),
-    PRODUCTION ("production"),
-    UNDEFINED ("undefined");
+public enum PersistenceContextType {
+    RESOURCE_LOCAL ("resource_local"),
+    JTA ("jta");
 
     private final String name;
 
-    AppEnvironment(String s) {
+    PersistenceContextType(String s) {
         name = s;
     }
 
