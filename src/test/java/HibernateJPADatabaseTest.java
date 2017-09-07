@@ -13,11 +13,4 @@ class HibernateJPADatabaseTest {
 
     @Inject
     private DatabaseManager dbManager;
-
-    @Test
-    void insertTest() {
-        HelloWorld model = new HelloWorld();
-        model.setTest("Teste 123");
-        dbManager.add(model);
-    }
 }

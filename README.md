@@ -29,3 +29,6 @@ Rodar os comandos: `local.sh`, `staging.sh`, `production.sh`;
 a fim da aplicação capturar as variáveis de ambiente configuradas e setar dinamicamente qual é
 o banco de dados utilizado. Talvez a IDE não reconheça, então é bom também configurar as variáveis
 ambiente na IDE. Aqui, também ficarão os comandos de criação de arquivos de sistema da aplicação.
+
+
+Boleiplate

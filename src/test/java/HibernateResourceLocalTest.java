@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
 import vetorlog.model.HelloWorld;
 import vetorlog.model.util.relational.DatabaseManager;
+import vetorlog.model.util.relational.JPAUtil;
 import vetorlog.model.util.relational.WrapperLocal;
 
 import javax.persistence.EntityManager;
@@ -31,8 +32,26 @@ class HibernateResourceLocalTest {
     @Test
     void insertTest() {
         HelloWorld model = new HelloWorld();
-        model.setTest("Teste 123");
-        model.setOtherTest(2);
+        model.setValueString("Teste " + (int)(Math.random() * 1000));
+        model.setValueDouble(Math.random() * 100000);
         dbManager.add(model);
+    }
+
+    @Test
+    void deleteTest() {
+
+    }
+
+    @Test
+    void updateTest() {
+        HelloWorld model = dbManager.findById(HelloWorld.class, "360f6991-b689-4ded-a49b-d2901b8abfcf");
+        model.setValueString("Modificado");
+        model.setValueDouble(-1);
+        dbManager.update(model);
+    }
+
+    @Test
+    void queryTest() {
+
     }
 }

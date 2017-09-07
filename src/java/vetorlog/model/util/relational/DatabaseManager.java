@@ -83,7 +83,7 @@ public class DatabaseManager {
      * @param id o id do item a ser buscado
      * @return objeto armazenado no BD
      */
-    public <T extends Model> T getById(Class<T> _class, Object id) {
+    public <T extends Model> T findById(Class<T> _class, Object id) {
         try {
             return this.em.find(_class, id);
         } catch (NoResultException e) {
@@ -111,7 +111,7 @@ public class DatabaseManager {
      * @return lista dos objetos cadastrados no banco
      */
     @SuppressWarnings({"unchecked"})
-    public <T extends Model> List<T> getAllFromIds(Class<T> _class, List<Long> ids) {
+    public <T extends Model, U> List<T> getAllFromIds(Class<T> _class, List<U> ids) {
         if(ids.isEmpty()) return new ArrayList<>();
         Query query = this.em.createQuery("SELECT t FROM  " + _class.getName() + " AS t WHERE t.id in :ids");
         query.setParameter("ids", ids);
@@ -177,26 +177,31 @@ public class DatabaseManager {
     public List getPaged(Query query, int start, int size) {
         query.setFirstResult(start);
         query.setMaxResults(size);
-
         return query.getResultList();
     }
 
     /**
-     * Método para contar os elementos de uma tabela
-     *
-     * @author Guizion Labs
-     * @return quantidade de elementos na tabela
+     * Conta os elementos de uma tabela
+     * @return Quantidade de elementos na tabela
      */
     public <T extends Model> int countRow(Class<T> _class) {
         return Integer.valueOf(this.em.createQuery("SELECT COUNT(*) FROM " + _class.getName()).getSingleResult().toString());
     }
 
+    /**
+     * Retorna o primeiro resultado da query, utilizando string e dicionário para valores
+     * @return Model do p[rimeiro elemento encontrado
+     */
     @SuppressWarnings("unchecked")
-    public <T extends Model> T getSingleResult(String queryStr, Map<String, Object> values){
+    public <T extends Model> T getSingleResult(String queryStr, Map<String, Object> values) {
         return (T) getResultList(queryStr, values).stream().findFirst().orElse(null);
 
     }
 
+    /**
+     * Retorna o primeiro resultado da query, utilizando TypedQuery
+     * @return Model do primeiro elemento encontrado
+     */
     public <T extends Model> T getSingleResult(TypedQuery<T> query) {
         return query.getResultList().stream().findFirst().orElse(null);
     }

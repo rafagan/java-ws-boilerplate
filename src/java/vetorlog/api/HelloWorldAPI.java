@@ -8,6 +8,9 @@ import javax.ws.rs.core.MediaType;
 //@Log4j2
 @Path("hello")
 public class HelloWorldAPI {
+
+
+
 //    @ApiOperation(value = "testando",produces = MediaType.TEXT_PLAIN)
     @GET
     @Produces(MediaType.TEXT_PLAIN)

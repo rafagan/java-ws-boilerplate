@@ -14,10 +14,9 @@ import javax.persistence.Table;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class HelloWorld extends Model {
-    @Column(name = "teste")
-    private String test;
+    @Column(name = "value_string")
+    private String valueString;
 
-    @Column(name = "valor")
-    private double otherTest;
+    @Column(name = "value_double")
+    private double valueDouble;
 }
-
