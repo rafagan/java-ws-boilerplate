@@ -10,12 +10,11 @@ class ResourceLocalTestConfig {
     @BeforeEach
     void startTransaction() {
         dbManager = new DatabaseManager();
-        dbManager.getEntityManager().getTransaction().begin();
+//        dbManager.getEntityManager().getTransaction().begin();
     }
 
     @AfterEach
     void stopTransaction() {
-        dbManager.getEntityManager().getTransaction().commit();
         dbManager.getEntityManager().close();
     }
 

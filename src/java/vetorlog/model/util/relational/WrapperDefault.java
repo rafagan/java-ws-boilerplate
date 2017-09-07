@@ -30,7 +30,7 @@ public class WrapperDefault implements IEntityManagerWrapper {
     public EntityManager getEntityManager() {
         if(factory == null)
             WrapperDefault.startFactory();
-        if(em == null)
+        if(em == null || !em.isOpen())
             em = factory.createEntityManager();
         return em;
     }

@@ -20,7 +20,7 @@ import java.util.Map;
 public class DatabaseManager {
     public static EnvironmentType ENVIRONMENT = EnvironmentType.UNDEFINED;
     public static PersistenceContextType CONTEXT = PersistenceContextType.RESOURCE_LOCAL;
-    private EntityManager em;
+    private IEntityManagerWrapper emw;
 
     private <T> boolean hasValidId(T id) {
         if(id instanceof Number)
@@ -34,20 +34,20 @@ public class DatabaseManager {
      * @return Manager do JPA
      */
     public EntityManager getEntityManager() {
-        if(em == null)
+        if(emw == null)
             switch(ENVIRONMENT) {
                 case LOCAL:
-                    em = new WrapperLocal().getEntityManager();
+                    emw = new WrapperLocal();
                 case STAGING:
-                    em = new WrapperStaging().getEntityManager();
+                    emw = new WrapperStaging();
                 case PRODUCTION:
-                    em = new WrapperProduction().getEntityManager();
+                    emw = new WrapperProduction();
                 default:
                     log.warn("Choosing persistence_unit=default. Please, set DatabaseManager.ENVIRONMENT with " +
                             "one of EnvironmentType enum values.");
-                    em = new WrapperDefault().getEntityManager();
+                    emw = new WrapperDefault();
             }
-        return em;
+        return emw.getEntityManager();
     }
 
     /**
@@ -56,7 +56,7 @@ public class DatabaseManager {
      * @param wrapper EntityManager injeado pelo ambiente (ex: ambiente de desenvolvimento local)
      */
     public void setEntityManager(IEntityManagerWrapper wrapper) {
-        em = wrapper.getEntityManager();
+        emw = wrapper;
     }
 
     /**
@@ -65,7 +65,16 @@ public class DatabaseManager {
      * @return Objeto relido
      */
     public <T extends Model> T reload(T object) {
+        if(CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            this.getEntityManager().getTransaction().begin();
+
         this.getEntityManager().refresh(object);
+
+        if(CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+            this.getEntityManager().getTransaction().commit();
+            this.getEntityManager().close();
+        }
+
         return object;
     }
 
@@ -75,11 +84,28 @@ public class DatabaseManager {
      * @return Objeto relido com valores do banco
      */
     public <T extends Model> T insert(T object) {
-        if (this.hasValidId(object))
+        if (this.hasValidId(object.getId()))
             return update(object);
-        this.getEntityManager().persist(object);
-        this.getEntityManager().flush();
-        return this.reload(object);
+
+        try {
+            if (CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().begin();
+
+            this.getEntityManager().persist(object);
+            this.getEntityManager().flush();
+            this.getEntityManager().refresh(object);
+
+            if (CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+                this.getEntityManager().getTransaction().commit();
+                this.getEntityManager().close();
+            }
+        } catch(Exception e) {
+            if (CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().rollback();
+            throw e;
+        }
+
+        return object;
     }
 
     /**
@@ -88,7 +114,24 @@ public class DatabaseManager {
      * @return Objeto atualizado
      */
     public <T extends Model> T update(T object) {
-        return this.getEntityManager().merge(object);
+        try {
+            if(CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().begin();
+
+            object = this.getEntityManager().merge(object);
+
+            if(CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+                this.getEntityManager().getTransaction().commit();
+                this.getEntityManager().close();
+            }
+
+        } catch(Exception e) {
+            if (CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().rollback();
+            throw e;
+        }
+
+        return object;
     }
 
     /**
@@ -96,8 +139,22 @@ public class DatabaseManager {
      * @param object Objeto a ser deletado
      */
     public <T extends Model> void delete(T object) {
-        T a = this.getEntityManager().merge(object);
-        this.getEntityManager().remove(a);
+        try {
+            if(CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().begin();
+
+            T a = this.getEntityManager().merge(object);
+            this.getEntityManager().remove(a);
+
+            if(CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+                this.getEntityManager().getTransaction().commit();
+                this.getEntityManager().close();
+            }
+        } catch(Exception e) {
+            if (CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().rollback();
+            throw e;
+        }
     }
 
     /**
