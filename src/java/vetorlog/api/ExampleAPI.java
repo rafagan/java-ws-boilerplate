@@ -6,11 +6,9 @@ import org.apache.logging.log4j.Level;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-//@Api(value = "Hello World")
 @Log4j2
-@Path("v1/hello")
-public class HelloWorldAPI {
-//    @ApiOperation(value = "testando",produces = MediaType.TEXT_PLAIN)
+@Path("v1/example")
+public class ExampleAPI {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String get() {
@@ -19,7 +17,6 @@ public class HelloWorldAPI {
         return result;
     }
 
-//    @ApiOperation(value = "testando",produces = MediaType.TEXT_PLAIN)
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
     public String delete() {
@@ -28,7 +25,6 @@ public class HelloWorldAPI {
         return result;
     }
 
-//    @ApiOperation(value = "testando",produces = MediaType.TEXT_PLAIN)
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
     public String put() {
@@ -37,7 +33,6 @@ public class HelloWorldAPI {
         return result;
     }
 
-//    @ApiOperation(value = "testando",produces = MediaType.TEXT_PLAIN)
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     public String post() {

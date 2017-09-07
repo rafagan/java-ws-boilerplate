@@ -10,13 +10,12 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor
 public class DatabaseManager {
-    public static AppEnvironment ENVIRONMENT;
+    public static AppEnvironment ENVIRONMENT = AppEnvironment.UNDEFINED;
     private EntityManager em;
 
     private <T> boolean hasValidId(T id) {
@@ -32,7 +31,17 @@ public class DatabaseManager {
      */
     public EntityManager getEntityManager() {
         if(em == null)
-            em = new WrapperLocal().getEntityManager();
+            switch(ENVIRONMENT) {
+                case LOCAL:
+                    em = new WrapperLocal().getEntityManager();
+                case STAGING:
+                    em = new WrapperStaging().getEntityManager();
+                case PRODUCTION:
+                    em = new WrapperProduction().getEntityManager();
+                default:
+                    WrapperResourceLocal.startFactory("default");
+                    em = new WrapperResourceLocal().getEntityManager();
+            }
         return em;
     }
 
@@ -46,26 +55,26 @@ public class DatabaseManager {
     }
 
     /**
-     * Adiciona um objeto no banco de dados
-     * @param object Objeto a ser adicionado
-     * @return Objeto relido com valores do banco
-     */
-    public <T extends Model> T add(T object) {
-        if (this.hasValidId(object))
-            return update(object);
-        this.getEntityManager().persist(object);
-        this.getEntityManager().flush();
-        return this.refresh(object);
-    }
-
-    /**
      * Relê objeto com valores do banco de dados
      * @param object Objeto a ser relido
      * @return Objeto relido
      */
-    public <T extends Model> T refresh(T object) {
+    public <T extends Model> T reload(T object) {
         this.getEntityManager().refresh(object);
         return object;
+    }
+
+    /**
+     * Adiciona um objeto no banco de dados
+     * @param object Objeto a ser adicionado
+     * @return Objeto relido com valores do banco
+     */
+    public <T extends Model> T insert(T object) {
+        if (this.hasValidId(object))
+            return update(object);
+        this.getEntityManager().persist(object);
+        this.getEntityManager().flush();
+        return this.reload(object);
     }
 
     /**
@@ -81,56 +90,57 @@ public class DatabaseManager {
      * Deleta um objeto no banco de dados
      * @param object Objeto a ser deletado
      */
-    public <T extends Model> void remove(T object) {
+    public <T extends Model> void delete(T object) {
         T a = this.getEntityManager().merge(object);
         this.getEntityManager().remove(a);
     }
 
     /**
+     * Lista todos os objetos do mesmo tipo cadastrados no banco de dados
+     * @param objectClass Classe JPA da tabela
+     * @return Lista dos objetos cadastrados
+     */
+    @SuppressWarnings({"unchecked"})
+    public <T extends Model> List<T> all(Class<T> objectClass) {
+        Query query = this.getEntityManager().createQuery(
+                "SELECT t FROM " + objectClass.getName() + " AS t"
+        );
+        return query.getResultList();
+    }
+
+    /**
      * Realiza busca de um objeto no banco de dados pelo ID (UUID ou Inteiro)
-     * @param _class Classe da tabela do banco de dados
+     * @param objectClass Classe JPA da tabela
      * @param id O id do object a ser buscado
      * @return Objeto encontrado
      */
-    public <T extends Model, U> T findById(Class<T> _class, U id) {
+    public <T extends Model, U> T find(Class<T> objectClass, U id) {
         try {
-            return this.getEntityManager().find(_class, id);
+            return this.getEntityManager().find(objectClass, id);
         } catch (NoResultException e) {
             return null;
         }
     }
 
     /**
-     * Lista todos os objetos do mesmo tipo cadastrados no banco de dados
-     * @param tableName Nome da tabela. Utilize de preferência o mesmo nome da classe a fins de genericidade e automação
-     * @return Lista dos objetos cadastrados
-     */
-    @SuppressWarnings({"unchecked"})
-    public <T extends Model> List<T> getAll(String tableName) {
-        return this.getEntityManager().createQuery(
-                "SELECT t FROM " + tableName + " AS t"
-        ).getResultList();
-    }
-
-    /**
      * Lista todos os objetos que tenham os IDs especificados no banco de dados
-     * @param tableName Nome da tabela. Utilize de preferência o mesmo nome da classe a fins de genericidade e automação
-     * @param ids Identificadores dos objetos a serem lidos
+     * @param objectClass Classe JPA da tabela
+     * @param ids Identificadores dos objetos a serem lidos (UUID ou Inteiro)
      * @return Lista dos objetos encontrados
      */
     @SuppressWarnings({"unchecked"})
-    public <T extends Model, U> List<T> find(String tableName, List<U> ids) {
+    public <T extends Model, U> List<T> find(Class<T> objectClass, List<U> ids) {
         if(ids.isEmpty()) return new ArrayList<>();
         
         Query query = this.getEntityManager().createQuery(
-                "SELECT t FROM  " + tableName + " AS t WHERE t.id in :ids");
+                "SELECT t FROM " + objectClass.getName() + " AS t WHERE t.id in :ids");
         query.setParameter("ids", ids);
         
         return query.getResultList();
     }
 
     /**
-     * Realizar uma consulta elaborada com uma pesquisa em texto e seus parâmetros mapeados em um dicionário
+     * Realiza uma consulta elaborada com uma pesquisa em texto e seus parâmetros mapeados em um dicionário
      * @param queryString Texto da pesquisa
      * @param queryParameters Parâmetros da pesquisa
      * @return Lista dos objetos resultantes da consulta
@@ -138,7 +148,7 @@ public class DatabaseManager {
     @SuppressWarnings("unchecked")
     public <T extends Model> List<T> find(String queryString, Map<String, Object> queryParameters) {
         Query query = this.getEntityManager().createQuery(queryString);
-        
+
         if(queryParameters != null)
             for (Map.Entry<String, Object> entry : queryParameters.entrySet())
                 query.setParameter(entry.getKey(), entry.getValue());
@@ -148,63 +158,76 @@ public class DatabaseManager {
 
 
     /**
-     * Método para listar os objetos em páginas
-     *
-     * @author Guizion Labs
-     * @param start index para começar a listagem
-     * @param size tamanho da página
+     * Realiza uma consulta elaborada com uma pesquisa em texto e seus parâmetros mapeados em um dicionário, com
+     * o resultado separado em páginas. Prefira o uso de TypedQuery para ter acesso a funcionalidades de syntax color
+     * @param queryString Texto da pesquisa
+     * @param queryParameters Parâmetros da pesquisa
+     * @param page Página desejada, calculada de acordo com o tamanho
+     * @param size Tamanho da página
      * @return Lista de objetos resultates da consulta
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> List<T> getPaged(String consulta, Map<String, Object> values, int start, int size) {
-        Query query = this.getEntityManager().createQuery(consulta);
+    public <T extends Model> List<T> find(String queryString, Map<String, Object> queryParameters, int page, int size) {
+        Query query = this.getEntityManager().createQuery(queryString);
 
-        if(values != null)
-            for (Map.Entry<String, Object> entry : values.entrySet())
+        if(queryParameters != null)
+            for (Map.Entry<String, Object> entry : queryParameters.entrySet())
                 query.setParameter(entry.getKey(), entry.getValue());
 
         query.setMaxResults(size);
-        query.setFirstResult(start);
+        query.setFirstResult(size * page);
 
         return query.getResultList();
     }
 
     /**
-     * Método para listar os objetos em páginas
-     *
-     * @author Guizion Labs
-     * @param start index para começar a listagem
-     * @param size tamanho da página
+     * Realiza uma consulta elaborada com o resultado separado em páginas.
+     * @param query Pesquisa, com parâmetros
+     * @param page Página desejada, calculada de acordo com o tamanho
+     * @param size Tamanho da página
      * @return Lista de objetos resultates da consulta
      */
-    public <T extends Model> List<T> getPaged(TypedQuery<T> query, int start, int size) {
-        query.setFirstResult(start);
+    public <T extends Model> List<T> find(TypedQuery<T> query, int page, int size) {
+        query.setFirstResult(page * size);
         query.setMaxResults(size);
 
         return query.getResultList();
     }
-    public List getPaged(Query query, int start, int size) {
-        query.setFirstResult(start);
+
+    /**
+     * Realiza uma consulta elaborada com o resultado separado em páginas.
+     * @param query Pesquisa, com parâmetros
+     * @param page Página desejada, calculada de acordo com o tamanho
+     * @param size Tamanho da página
+     * @return Lista de objetos resultates da consulta
+     */
+    public List find(Query query, int page, int size) {
+        query.setFirstResult(page * size);
         query.setMaxResults(size);
+
         return query.getResultList();
     }
 
     /**
      * Conta os elementos de uma tabela
-     * @return Quantidade de elementos na tabela
+     * @param objectClass Classe JPA da tabela
+     * @return Quantidade de elementos
      */
-    public <T extends Model> int countRow(Class<T> _class) {
-        return Integer.valueOf(this.getEntityManager().createQuery("SELECT COUNT(*) FROM " + _class.getName()).getSingleResult().toString());
+    public <T extends Model> int count(Class<T> objectClass) {
+        Query query = this.getEntityManager().createQuery("SELECT COUNT(*) FROM " + objectClass.getName());
+        return Integer.valueOf(query.getSingleResult().toString());
     }
 
     /**
      * Retorna o primeiro resultado para a tabela
-     * @param tableName Nome da tabela. Utilize de preferência o mesmo nome da classe a fins de genericidade e automação
-     * @return Model do primeiro elemento encontrado
+     * @param objectClass Classe JPA da tabela
+     * @return Objeto do primeiro elemento encontrado
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> T findFirst(String tableName) {
-        List<T> list = this.getPaged(String.format("SELECT n FROM %s", tableName), null, 0, 1);
+    public <T extends Model> T first(Class<T> objectClass) {
+        Query query = this.getEntityManager().createQuery("SELECT n FROM " + objectClass.getName() + " AS n");
+        List<T> list = this.find(query, 0, 1);
+
         return list.isEmpty() ? null : list.get(0);
     }
 
@@ -213,19 +236,19 @@ public class DatabaseManager {
      * na pesquisa
      * @param queryString Texto da pesquisa
      * @param queryParameters Parâmetros da pesquisa
-     * @return Model do primeiro elemento encontrado
+     * @return Objeto do primeiro elemento encontrado
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> T findFirst(String queryString, Map<String, Object> queryParameters) {
+    public <T extends Model> T first(String queryString, Map<String, Object> queryParameters) {
         return (T) find(queryString, queryParameters).stream().findFirst().orElse(null);
 
     }
 
     /**
      * Retorna o primeiro resultado da query, utilizando TypedQuery
-     * @return Model do primeiro elemento encontrado
+     * @return Objeto do primeiro elemento encontrado
      */
-    public <T extends Model> T findFirst(TypedQuery<T> query) {
+    public <T extends Model> T first(TypedQuery<T> query) {
         return query.getResultList().stream().findFirst().orElse(null);
     }
 }

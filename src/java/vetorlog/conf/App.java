@@ -9,7 +9,7 @@ import vetorlog.model.util.relational.DatabaseManager;
 import javax.ws.rs.ApplicationPath;
 import java.util.Map;
 
-@ApplicationPath("/")
+@ApplicationPath("api")
 public class App extends ResourceConfig {
     private void confJersey2() {
         packages("vetorlog.api;"); //com.wordnik.swagger.jaxrs.listing;

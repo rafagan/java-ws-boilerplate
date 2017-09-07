@@ -3,7 +3,8 @@ package vetorlog.conf;
 public enum AppEnvironment {
     LOCAL ("local"),
     STAGING ("staging"),
-    PRODUCTION ("production");
+    PRODUCTION ("production"),
+    UNDEFINED ("undefined");
 
     private final String name;
 

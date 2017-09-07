@@ -10,10 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ModelExample")
+@Table(name="ExampleTable")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ModelExample extends Model {
+public class ExampleModel extends Model {
     @Column(name = "value_string")
     private String valueString;
 
