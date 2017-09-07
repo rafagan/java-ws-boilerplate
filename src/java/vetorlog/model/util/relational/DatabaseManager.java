@@ -2,6 +2,7 @@ package vetorlog.model.util.relational;
 
 
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import vetorlog.conf.AppEnvironment;
 import vetorlog.model.prototype.Model;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor
+@Log4j2
 public class DatabaseManager {
     public static AppEnvironment ENVIRONMENT = AppEnvironment.UNDEFINED;
     private EntityManager em;
@@ -39,6 +41,8 @@ public class DatabaseManager {
                 case PRODUCTION:
                     em = new WrapperProduction().getEntityManager();
                 default:
+                    log.warn("Choosing persistence_unit=default. Please, set DatabaseManager.ENVIRONMENT with " +
+                            "one of AppEnvironment enum values.");
                     WrapperResourceLocal.startFactory("default");
                     em = new WrapperResourceLocal().getEntityManager();
             }
