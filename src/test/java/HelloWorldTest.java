@@ -1,15 +1,32 @@
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+/**
+ * IMPORTANTE: Verifique sempre se está importando classes e métodos de org.junit.jupiter, caso contrário
+ * estará correndo o risco de estar usando JUNIT4, o qual não está integrado ao projeto
+ */
 class HelloWorldTest {
-    private static final Logger logger = LogManager.getRootLogger();
+    @BeforeAll
+    static void beforeClass() {
+        System.out.println("@BeforeClass");
+    }
+
+    @BeforeEach
+    void before() {
+        System.out.println("@Before");
+    }
 
     @Test
-    void firstTest() {
-        logger.trace("hahaha");
-        System.out.println("Teste");
-        Assertions.assertEquals(1 + 3, 2 + 2);
+    void test() {
+        System.out.println("@Test");
+    }
+
+    @AfterEach
+    void after() {
+        System.out.println("@After");
+    }
+
+    @AfterAll
+    static void afterClass() {
+        System.out.println("@AfterClass");
     }
 }

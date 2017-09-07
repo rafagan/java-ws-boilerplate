@@ -1,6 +1,8 @@
 package vetorlog.model;
 
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import vetorlog.model.prototype.Model;
 
 import javax.persistence.Column;
@@ -9,7 +11,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="HelloWorld")
-public class HelloWorldStringId extends Model {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class HelloWorld extends Model {
     @Column(name = "teste")
-    private String teste;
+    private String test;
+
+    @Column(name = "valor")
+    private double otherTest;
 }
+

@@ -2,10 +2,9 @@ package vetorlog.model.util.relational;
 
 
 import lombok.NoArgsConstructor;
+import vetorlog.conf.AppEnvironment;
 import vetorlog.model.prototype.Model;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -15,13 +14,18 @@ import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor
-@Stateless
 public class DatabaseManager {
-    @Inject
+    public static AppEnvironment ENVIRONMENT;
     private EntityManager em;
 
-    public EntityManager getManager() {
+    public EntityManager getEntityManager() {
+        if(em == null)
+            em = new WrapperLocal().getEntityManager();
         return em;
+    }
+
+    public void setEntityManager(IEntityManagerWrapper wrapper) {
+        em = wrapper.getEntityManager();
     }
 
     private boolean hasValidId(Object id) {
@@ -196,5 +200,4 @@ public class DatabaseManager {
     public <T extends Model> T getSingleResult(TypedQuery<T> query) {
         return query.getResultList().stream().findFirst().orElse(null);
     }
-
 }

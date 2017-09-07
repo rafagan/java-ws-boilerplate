@@ -22,7 +22,7 @@
         <javax.servlet.version>4.0.0</javax.servlet.version>
         <jaxrs.version>2.1</jaxrs.version>
         <javax.persistence.version>2.2.0</javax.persistence.version>
-        <javax.ejb.version>3.2</javax.ejb.version>
+        <!--<javax.ejb.version>3.2</javax.ejb.version>-->
 
         <!-- Third Party Apps -->
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
@@ -185,11 +185,11 @@
         </dependency>
 
         <!-- Dependency injection: Guice -->
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax.ejb-api</artifactId>
-            <version>${javax.ejb.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.ejb</groupId>-->
+            <!--<artifactId>javax.ejb-api</artifactId>-->
+            <!--<version>${javax.ejb.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>

@@ -1,0 +1,43 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <!--transaction-type="JTA"-->
+    <persistence-unit name="mysql_local" transaction-type="RESOURCE_LOCAL">
+        <description>MySQL local configuration</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!--<jta-data-source>jdbc/_Boomb</jta-data-source>-->
+        <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+        <class>vetorlog.model.HelloWorld</class>
+
+        <properties>
+            <!--<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>-->
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.show_sql" value="true" />
+
+            <property name="javax.persistence.schema-generation.database.action" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <!--<property name="javax.persistence.schema-generation.database.action" value="validate"/>-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="validate" />-->
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/emeter?useSSL=false" />
+            <property name="javax.persistence.jdbc.user" value="vetorlog" />
+            <property name="javax.persistence.jdbc.password" value="abcd@1234" />
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="myqsl_staging">
+        <description>MySQL staging configuration</description>
+    </persistence-unit>
+
+    <persistence-unit name="myqsl_production">
+        <description>MySQL production configuration</description>
+    </persistence-unit>
+</persistence>

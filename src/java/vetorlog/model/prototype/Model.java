@@ -12,7 +12,6 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 public class Model {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private String id;
 
