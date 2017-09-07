@@ -217,7 +217,7 @@ public class DatabaseManager {
      */
     @SuppressWarnings("unchecked")
     public <T extends Model> T findFirst(String queryString, Map<String, Object> queryParameters) {
-        return (T) getResultList(queryString, queryParameters).stream().findFirst().orElse(null);
+        return (T) find(queryString, queryParameters).stream().findFirst().orElse(null);
 
     }
 
