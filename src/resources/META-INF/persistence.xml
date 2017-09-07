@@ -11,7 +11,7 @@
 
         <!--<jta-data-source>jdbc/_Boomb</jta-data-source>-->
         <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
-        <class>vetorlog.model.HelloWorld</class>
+        <class>vetorlog.model.ModelExample</class>
 
         <properties>
             <!--<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>-->

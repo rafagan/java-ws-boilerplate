@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.*;
-import vetorlog.model.HelloWorld;
+import vetorlog.model.ModelExample;
 import vetorlog.model.util.relational.DatabaseManager;
 import vetorlog.model.util.relational.JPAUtil;
 import vetorlog.model.util.relational.WrapperLocal;
@@ -29,9 +29,10 @@ class HibernateResourceLocalTest {
         JPAUtil.shutdown();
     }
 
+
     @Test
     void insertTest() {
-        HelloWorld model = new HelloWorld();
+        ModelExample model = new ModelExample();
         model.setValueString("Teste " + (int)(Math.random() * 1000));
         model.setValueDouble(Math.random() * 100000);
         dbManager.add(model);
@@ -39,12 +40,12 @@ class HibernateResourceLocalTest {
 
     @Test
     void deleteTest() {
-
+//        ModelExample model = dbManager.
     }
 
     @Test
     void updateTest() {
-        HelloWorld model = dbManager.findById(HelloWorld.class, "360f6991-b689-4ded-a49b-d2901b8abfcf");
+        ModelExample model = dbManager.findById(ModelExample.class, "360f6991-b689-4ded-a49b-d2901b8abfcf");
         model.setValueString("Modificado");
         model.setValueDouble(-1);
         dbManager.update(model);
