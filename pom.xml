@@ -36,19 +36,6 @@
         <jackson.version>2.9.0</jackson.version>
     </properties>
 
-    <!-- TODO: Ver se não dá para tirar isso daqui-->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.glassfish.jersey</groupId>
-                <artifactId>jersey-bom</artifactId>
-                <version>${jaxrs.jersey.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
             <!-- Configurações de compilação -->
@@ -100,7 +87,6 @@
         </plugins>
     </build>
 
-    <!-- Dependências do projeto -->
     <dependencies>
         <!-- Logging: Log4j 2 -->
         <dependency>
@@ -162,6 +148,11 @@
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jaxrs.jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey</groupId>
+            <artifactId>jersey-bom</artifactId>
             <version>${jaxrs.jersey.version}</version>
         </dependency>
 
