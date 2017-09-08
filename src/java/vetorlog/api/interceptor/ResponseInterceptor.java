@@ -15,6 +15,5 @@ public class ResponseInterceptor implements ContainerResponseFilter {
     public void filter(ContainerRequestContext containerRequestContext,
                        ContainerResponseContext containerResponseContext) throws IOException
     {
-        log.debug("ResponseInterceptor called");
     }
 }

@@ -2,19 +2,23 @@ package vetorlog.api;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
+import vetorlog.controller.ExampleController;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Log4j2
 @Path("v1/example")
 public class ExampleAPI {
+    // TODO: Injetar dependência
+    private ExampleController controller = new ExampleController();
+
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String get() {
-        String result = "Hello World GET";
-        log.log(Level.INFO, result);
-        return result;
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get() {
+        return controller.get();
     }
 
     @DELETE

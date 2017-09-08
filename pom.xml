@@ -36,6 +36,7 @@
         <jackson.version>2.9.0</jackson.version>
     </properties>
 
+    <!-- TODO: Ver se não dá para tirar isso daqui-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -156,6 +157,11 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
+            <version>${jaxrs.jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jaxrs.jersey.version}</version>
         </dependency>
 
