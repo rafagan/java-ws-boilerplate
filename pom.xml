@@ -33,6 +33,7 @@
         <lombok.version>1.16.18</lombok.version>
         <google.guice.version>3.0</google.guice.version>
         <mysql.version>8.0.7-dmr</mysql.version>
+        <jackson.version>2.9.0</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -156,6 +157,28 @@
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
             <version>${jaxrs.jersey.version}</version>
+        </dependency>
+
+        <!-- JSON: Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!-- JPA/JPQL: Hibernate -->

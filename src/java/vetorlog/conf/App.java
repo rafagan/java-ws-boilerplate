@@ -6,6 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import vetorlog.api.interceptor.RequestInterceptor;
+import vetorlog.api.interceptor.ResponseInterceptor;
 import vetorlog.model.util.relational.DatabaseManager;
 
 import javax.validation.constraints.Null;
@@ -15,6 +17,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 import java.util.Objects;
 
@@ -22,23 +26,28 @@ import java.util.Objects;
 @Log4j2
 public class App extends ResourceConfig {
     private PersistenceContextType readDatabaseContextFromPersistenceXml(String globalName) {
-        val persistenceConfigPath = System.getProperty("user.dir") + "/src/resources/META-INF/persistence.xml";
-        File xmlFile = new File(persistenceConfigPath);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-
         try {
+            globalName = String.format("%s_%s",
+                    System.getenv().get("EMETER_APP_DATABASE"),
+                    globalName);
+
+            String persistenceConfigPath = this.getClass().getClassLoader().getResource(
+                    "META-INF/persistence.xml").getFile();
+            File xmlFile = new File(persistenceConfigPath);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(xmlFile);
             val persistence = doc.getChildNodes().item(0);
 
-            for(int i = 0; i < persistence.getChildNodes().getLength(); i++) {
+            for (int i = 0; i < persistence.getChildNodes().getLength(); i++) {
                 val child = persistence.getChildNodes().item(i);
-                if(Objects.equals(child.getNodeName(), "persistence-unit")) {
+                if (Objects.equals(child.getNodeName(), "persistence-unit")) {
                     val attributes = child.getAttributes();
                     val name = attributes.getNamedItem("name").getNodeValue();
                     try {
                         val context = attributes.getNamedItem("transaction-type").getNodeValue();
-                        if(Objects.equals(name, globalName))
+                        if (Objects.equals(name, globalName))
                             return PersistenceContextType.valueOf(context);
                     } catch (NullPointerException e) {
                         val details = String.format("transaction-type not found for persistence-unit named: %s", name);
@@ -46,7 +55,7 @@ public class App extends ResourceConfig {
                     }
                 }
             }
-        } catch (SAXException | IOException | ParserConfigurationException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -57,8 +66,7 @@ public class App extends ResourceConfig {
     private void confDatabase() {
         String globalName = "";
         try {
-            Map<String, String> env = System.getenv();
-            globalName = env.get("EMETER_APP_ENVIRONMENT");
+            globalName = System.getenv().get("EMETER_APP_ENVIRONMENT");
             DatabaseManager.ENVIRONMENT = EnvironmentType.valueOf(globalName.toUpperCase());
         } catch(NullPointerException e) {
             log.warn("EMETER_APP_ENVIRONMENT is not set, please run the commands from one of the shell scripts " +
@@ -77,15 +85,14 @@ public class App extends ResourceConfig {
     }
 
     public App() {
+//        register(JacksonConf.class);
+
         confDatabase();
         confJersey2();
         confGuice();
 
-//        register(RequestInterceptor.class);
-//        register(JacksonFeature.class);
 //        register(MultiPartFeature.class);
 //        register(AppServletContextListener.class);
-//        register(ExceptionInterceptor.class);
 
 //        BeanConfig beanConfig = new BeanConfig();
 //        beanConfig.setTitle("Boomb");

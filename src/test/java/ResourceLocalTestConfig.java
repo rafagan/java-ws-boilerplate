@@ -15,6 +15,7 @@ class ResourceLocalTestConfig {
 
     @AfterEach
     void stopTransaction() {
+//        dbManager.getEntityManager().getTransaction().commit();
         dbManager.getEntityManager().close();
     }
 
