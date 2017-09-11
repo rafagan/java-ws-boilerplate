@@ -1,3 +1,5 @@
+package vetorlog.examples;
+
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import vetorlog.model.ExampleModel;
@@ -51,7 +53,7 @@ class HibernateTest extends ResourceLocalTestConfig {
         List<ExampleModel> models = dbManager.find(query, 0, 100);
 
         System.out.println(String.format("max x cout: %d x %d", dbManager.count(ExampleModel.class), models.size()));
-        for(val model : models)
+        for(ExampleModel model : models)
             System.out.println(model.getValueString() + ": " + model.getValueDouble());
     }
 
@@ -64,7 +66,7 @@ class HibernateTest extends ResourceLocalTestConfig {
         List<ExampleModel> models = dbManager.find(queryString, queryParameters, 0, 100);
 
         System.out.println(String.format("max x cout: %d x %d", dbManager.count(ExampleModel.class), models.size()));
-        for(val model : models)
+        for(ExampleModel model : models)
             System.out.println(model.getValueString() + ": " + model.getValueDouble());
     }
 }

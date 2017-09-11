@@ -85,14 +85,9 @@ public class App extends ResourceConfig {
     }
 
     public App() {
-//        register(JacksonConf.class);
-
         confDatabase();
         confJersey2();
         confGuice();
-
-//        register(MultiPartFeature.class);
-//        register(AppServletContextListener.class);
 
 //        BeanConfig beanConfig = new BeanConfig();
 //        beanConfig.setTitle("Boomb");
