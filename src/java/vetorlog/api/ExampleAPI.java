@@ -2,8 +2,10 @@ package vetorlog.api;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
+import vetorlog.conf.Constants;
 import vetorlog.controller.ExampleController;
 
+import javax.validation.constraints.Size;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,8 +19,16 @@ public class ExampleAPI {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get() {
-        return controller.get();
+    public Response get(
+            @QueryParam("interval") int interval,
+            @QueryParam("page")
+            int page,
+            @QueryParam("size")
+            @Size(min = 1)
+            @DefaultValue(Constants.DEFAULT_PAGE_SIZE)
+            int size)
+    {
+        return controller.get(interval, page, size);
     }
 
     @DELETE

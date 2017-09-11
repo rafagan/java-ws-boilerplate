@@ -215,6 +215,5 @@
             <artifactId>guice</artifactId>
             <version>${google.guice.version}</version>
         </dependency>
-
     </dependencies>
 </project>
