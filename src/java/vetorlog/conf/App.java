@@ -1,5 +1,6 @@
 package vetorlog.conf;
 
+import io.sentry.Sentry;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -22,8 +23,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Objects;
 
-@ApplicationPath("api")
 @Log4j2
+@ApplicationPath("api")
 public class App extends ResourceConfig {
     private PersistenceContextType readDatabaseContextFromPersistenceXml(String globalName) {
         try {
@@ -84,10 +85,15 @@ public class App extends ResourceConfig {
 //        Injector injector = Guice.createInjector(new BasicModule());
     }
 
+    private void confSentry() {
+        Sentry.init();
+    }
+
     public App() {
         confDatabase();
         confJersey2();
         confGuice();
+        confSentry();
 
 //        BeanConfig beanConfig = new BeanConfig();
 //        beanConfig.setTitle("Boomb");
@@ -99,3 +105,4 @@ public class App extends ResourceConfig {
 //        beanConfig.setHost(Utils.localhostOrServerUrl(C.msDescriptor.getRestUrl()));
     }
 }
+
