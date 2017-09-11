@@ -2,6 +2,5 @@
 new-econometer.iml
 target/
 
-src/webapp/META-INF
 src/webapp/WEB-INF
 .gitignore
