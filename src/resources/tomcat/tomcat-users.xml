@@ -45,5 +45,6 @@
     <role rolename="manager-gui"/>
     <role rolename="manager-script"/>
     <role rolename="manager-jmx"/>
-    <user username="vetorlog" password="abcd@1234" roles="manager,manager-gui,manager-script,manager-jmx"/>
+    <user username="vetorlog" password="abcd@1234"
+          roles="manager,manager-gui,manager-script,manager-jmx,admin,admin-gui"/>
 </tomcat-users>

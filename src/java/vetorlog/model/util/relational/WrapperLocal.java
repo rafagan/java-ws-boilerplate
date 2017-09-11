@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class WrapperLocal implements IEntityManagerWrapper {
-    @PersistenceContext(name="mysql_local")
+//    @PersistenceContext(name="mysql_local")
+    @PersistenceUnit(name="mysql_local")
     private EntityManager em;
 
     @Override

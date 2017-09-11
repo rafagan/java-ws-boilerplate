@@ -21,8 +21,10 @@ Ele serve apenas para consulta na fase de desenvolvimento.
 
 ### Configuração do servlet container Tomcat 8 ###
 
- * Rodar `tomcat_manager.sh` para configurar usuário do manager
- * Rodar `tomcat_db_pool.sh` para configurar pool de conexões
+Rodar `tomcat.sh` para configurações de:
+
+ * Usuários do Tomcat 8
+ * Dependências necessárias (maven scope provided)
  
 ### Configuração de ambiente ###
 Rodar os comandos: `local.sh`, `staging.sh`, `production.sh`;

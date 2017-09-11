@@ -38,15 +38,25 @@ public class DatabaseManager {
             switch(ENVIRONMENT) {
                 case LOCAL:
                     emw = new WrapperLocal();
+                    break;
                 case STAGING:
                     emw = new WrapperStaging();
+                    break;
                 case PRODUCTION:
                     emw = new WrapperProduction();
+                    break;
                 default:
                     log.warn("Choosing persistence_unit=default. Please, set DatabaseManager.ENVIRONMENT with " +
                             "one of EnvironmentType enum values.");
                     emw = new WrapperDefault();
             }
+
+        if(emw.getEntityManager() == null) {
+            log.warn(String.format("Wrapper of environment type %s has a null EntityManager, verify if it's being " +
+                    "injected and configured properly. For now, using default.", ENVIRONMENT));
+            emw = new WrapperDefault();
+        }
+
         return emw.getEntityManager();
     }
 
