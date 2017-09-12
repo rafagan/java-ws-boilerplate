@@ -1,6 +1,7 @@
 package vetorlog.conf;
 
 import io.sentry.Sentry;
+import io.swagger.jaxrs.config.BeanConfig;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -89,20 +90,29 @@ public class App extends ResourceConfig {
         Sentry.init();
     }
 
+    private void confSwagger() {
+        BeanConfig beanConfig = new BeanConfig();
+        beanConfig.setTitle("Econometer");
+        beanConfig.setDescription("Documentação das requisiçòes do projeto e interface de teste");
+        beanConfig.setVersion("1.0");
+        beanConfig.setResourcePackage("vetorlog.api");
+        beanConfig.setScan(true);
+        beanConfig.setPrettyPrint(true);
+        beanConfig.setBasePath("/api");
+        beanConfig.setSchemes(new String[]{"http", "https"});
+        beanConfig.setHost("0.0.0.0:8080");
+
+
+        register(io.swagger.jaxrs.listing.ApiListingResource.class);
+        register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+    }
+
     public App() {
         confDatabase();
         confJersey2();
         confGuice();
         confSentry();
-
-//        BeanConfig beanConfig = new BeanConfig();
-//        beanConfig.setTitle("Boomb");
-//        beanConfig.setVersion("1.0");
-//        beanConfig.setSchemes(new String[]{"http"});
-//        beanConfig.setBasePath("api");
-//        beanConfig.setResourcePackage("com.guizion.boomb.resource");
-//        beanConfig.setScan(true);
-//        beanConfig.setHost(Utils.localhostOrServerUrl(C.msDescriptor.getRestUrl()));
+        confSwagger();
     }
 }
 

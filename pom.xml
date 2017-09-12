@@ -36,6 +36,7 @@
         <jackson.version>2.9.0</jackson.version>
         <sentry.version>1.5.3</sentry.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <swagger.version>1.5.16</swagger.version>
     </properties>
 
     <build>
@@ -247,6 +248,23 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>${google.guice.version}</version>
+        </dependency>
+
+        <!-- Documentação: Swagger -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
     </dependencies>
 </project>
