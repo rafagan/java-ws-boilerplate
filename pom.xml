@@ -31,7 +31,6 @@
         <jaxrs.jersey.version>2.25.1</jaxrs.jersey.version>
         <hibernate.version>5.2.10.Final</hibernate.version>
         <lombok.version>1.16.18</lombok.version>
-        <google.guice.version>3.0</google.guice.version>
         <mysql.version>6.0.6</mysql.version>
         <jackson.version>2.9.0</jackson.version>
         <sentry.version>1.5.3</sentry.version>
@@ -239,16 +238,7 @@
         </dependency>
 
         <!-- Dependency injection: Guice -->
-        <!--<dependency>-->
-            <!--<groupId>javax.ejb</groupId>-->
-            <!--<artifactId>javax.ejb-api</artifactId>-->
-            <!--<version>${javax.ejb.version}</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>${google.guice.version}</version>
-        </dependency>
+
 
         <!-- Documentação: Swagger -->
         <dependency>

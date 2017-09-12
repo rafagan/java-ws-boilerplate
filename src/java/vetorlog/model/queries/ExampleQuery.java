@@ -3,12 +3,13 @@ package vetorlog.model.queries;
 import vetorlog.model.ExampleModel;
 import vetorlog.model.util.relational.DatabaseManager;
 
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class ExampleQuery {
-    //Injetar
-    private DatabaseManager dbManager = new DatabaseManager();
+    @Inject
+    private DatabaseManager dbManager;
 
     public List<ExampleModel> filterByInterval(int interval, int page, int size) {
         TypedQuery<ExampleModel> query = dbManager.getEntityManager().createQuery(

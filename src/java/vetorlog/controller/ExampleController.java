@@ -7,13 +7,16 @@ import vetorlog.model.queries.ExampleQuery;
 import vetorlog.model.util.relational.DatabaseManager;
 import vetorlog.serializer.ExampleSerializer;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ExampleController {
-    // TODO: Injetar
-    private DatabaseManager dbManager = new DatabaseManager();
-    private ExampleQuery query = new ExampleQuery();
+    @Inject
+    private DatabaseManager dbManager;
+
+    @Inject
+    private ExampleQuery query;
 
     public Response get(int interval, int page, int size) {
         List<ExampleModel> models = query.filterByInterval(interval, page, size);
