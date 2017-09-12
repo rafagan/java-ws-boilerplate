@@ -8,6 +8,7 @@ import vetorlog.conf.Constants;
 import vetorlog.controller.ExampleController;
 import vetorlog.dto.ExampleDTO;
 
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,9 +21,7 @@ public class ExampleAPI {
     // TODO: Injetar dependência
     private ExampleController controller = new ExampleController();
 
-    @ApiOperation(value = "Requisição GET com query params e retorno de JSON",
-            produces = MediaType.APPLICATION_JSON
-    )
+    @ApiOperation(value = "Requisição GET com query params e retorno de JSON", produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWithQueryParams(
@@ -34,6 +33,9 @@ public class ExampleAPI {
             @DefaultValue(Constants.DEFAULT_PAGE_SIZE)
                     int size)
     {
+        if(true)
+            throw new NullPointerException("adasknasdjnasdjk");
+
         return controller.get(interval, page, size);
     }
 
