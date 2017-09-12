@@ -22,4 +22,4 @@ cp -v ${ORIGIN}/resources/tomcat/manager-context.xml ${WEBAPPS}/host-manager/MET
 cp -v ${ORIGIN}/resources/tomcat/context.xml ${CONF}/context.xml;
 
 # Dependências provided
-cp -r ${ORIGIN}/tomcat-mvn-provided/* /usr/local/Cellar/tomcat/8.5.20/libexec/lib/;
+cp -r ${ORIGIN}/tomcat-libs/* /usr/local/Cellar/tomcat/8.5.20/libexec/lib/;

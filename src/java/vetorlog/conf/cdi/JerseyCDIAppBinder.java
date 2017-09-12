@@ -29,7 +29,7 @@ public class JerseyCDIAppBinder extends AbstractBinder {
             default:
                 log.warn("Choosing persistence_unit=default. Please, set DatabaseManager.ENVIRONMENT with " +
                         "one of EnvironmentType enum values.");
-                bind(IEntityManagerWrapper.class).to(WrapperDefault.class);
+                bind(WrapperDefault.class).to(IEntityManagerWrapper.class);
         }
     }
 }

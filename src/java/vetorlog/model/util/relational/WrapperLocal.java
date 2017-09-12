@@ -12,8 +12,7 @@ import javax.persistence.PersistenceUnit;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WrapperLocal implements IEntityManagerWrapper {
-//    @PersistenceContext(name="mysql_local")
-    @PersistenceUnit(name="mysql_local")
+    @PersistenceContext(name="mysql_local")
     private EntityManager em;
 
     @Override
