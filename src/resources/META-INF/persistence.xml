@@ -27,7 +27,6 @@
         </properties>
     </persistence-unit>
 
-
     <!-- Example with Tomcat Connection Pool implementation -->
     <persistence-unit name="mysql_staging" transaction-type="RESOURCE_LOCAL">
         <description>MySQL staging configuration</description>
@@ -35,8 +34,6 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
-            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
-
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
             <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
@@ -52,13 +49,15 @@
 
     <persistence-unit name="mysql_local" transaction-type="JTA">
         <description>MySQL local configuration</description>
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!--<jta-data-source>jdbc/_Boomb</jta-data-source>-->
+        <jta-data-source>java:/comp/env/jdbc/mysql</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
-            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+            <property name="hibernate.transaction.manager_lookup_class"
+                      value="com.atomikos.icatch.jta.hibernate3.TransactionManagerLookup" />
+            <property name="hibernate.transaction.factory_class"
+                      value="org.hibernate.transaction.CMTTransactionFactory" />
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
             <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
