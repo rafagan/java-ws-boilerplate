@@ -19,7 +19,8 @@ WEBAPPS='/usr/local/Cellar/tomcat/8.5.20/libexec/webapps';
 cp -v ${ORIGIN}/resources/tomcat/tomcat-users.xml ${CONF}/tomcat-users.xml;
 cp -v ${ORIGIN}/resources/tomcat/manager-context.xml ${WEBAPPS}/manager/META-INF/context.xml;
 cp -v ${ORIGIN}/resources/tomcat/manager-context.xml ${WEBAPPS}/host-manager/META-INF/context.xml;
-cp -v ${ORIGIN}/resources/tomcat/context.xml ${CONF}/context.xml;
+cp -v ${ORIGIN}/resources/tomcat/context.xml ${CONF}/;
+cp -v ${ORIGIN}/resources/tomcat/server.xml ${CONF}/;
 
 # Dependências provided
 cp -r ${ORIGIN}/tomcat-libs/* /usr/local/Cellar/tomcat/8.5.20/libexec/lib/;

@@ -28,6 +28,7 @@
     </persistence-unit>
 
 
+    <!-- Example with Tomcat Connection Pool implementation -->
     <persistence-unit name="mysql_staging" transaction-type="RESOURCE_LOCAL">
         <description>MySQL staging configuration</description>
         <non-jta-data-source>java:/comp/env/jdbc/mysql</non-jta-data-source>
