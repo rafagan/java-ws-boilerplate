@@ -84,15 +84,16 @@ public class App extends ResourceConfig {
     private void confSwagger() {
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setTitle("Econometer");
-        beanConfig.setDescription("Documentação das requisiçòes do projeto e interface de teste");
+        beanConfig.setDescription("Documentação das requisições do projeto e interface de teste");
         beanConfig.setVersion("1.0");
         beanConfig.setResourcePackage("vetorlog.api");
         beanConfig.setScan(true);
         beanConfig.setPrettyPrint(true);
         beanConfig.setBasePath("/api");
         beanConfig.setSchemes(new String[]{"http", "https"});
-        beanConfig.setHost("0.0.0.0:8080");
 
+        String url = System.getenv().get("EMETER_APP_URL");
+        beanConfig.setHost(url);
 
         register(io.swagger.jaxrs.listing.ApiListingResource.class);
         register(io.swagger.jaxrs.listing.SwaggerSerializers.class);

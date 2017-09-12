@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import vetorlog.conf.Constants;
 import vetorlog.controller.ExampleController;
+import vetorlog.dto.ExampleDTO;
 
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
@@ -19,7 +20,9 @@ public class ExampleAPI {
     // TODO: Injetar dependência
     private ExampleController controller = new ExampleController();
 
-    @ApiOperation(value = "Requisição GET com query params e retorno de JSON", produces = MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Requisição GET com query params e retorno de JSON",
+            produces = MediaType.APPLICATION_JSON
+    )
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWithQueryParams(
