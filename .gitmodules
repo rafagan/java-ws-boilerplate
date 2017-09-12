@@ -1,7 +1,7 @@
-[submodule "src/webapp/vetorlog-angular"]
-	path = src/webapp/vetorlog-angular
-	url = https://RafaganAbreu@bitbucket.org/guizion/vetorlog-angular.git
-
 [submodule "src/webapp/swagger"]
 	path = src/webapp/swagger
 	url = https://github.com/swagger-api/swagger-ui.git
+
+[submodule "src/webapp"]
+	path = src/webapp
+	url = https://bitbucket.org/guizion/vetorlog-angular.git
