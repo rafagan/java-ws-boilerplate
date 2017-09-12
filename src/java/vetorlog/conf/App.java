@@ -7,21 +7,12 @@ import lombok.val;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import vetorlog.api.interceptor.RequestInterceptor;
-import vetorlog.api.interceptor.ResponseInterceptor;
 import vetorlog.model.util.relational.DatabaseManager;
 
-import javax.validation.constraints.Null;
 import javax.ws.rs.ApplicationPath;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Map;
 import java.util.Objects;
 
 @Log4j2
