@@ -237,13 +237,8 @@
             <version>${lombok.version}</version>
         </dependency>
 
-        <!-- Dependency injection DB: JTA -->
-        <dependency>
-            <groupId>com.atomikos</groupId>
-            <artifactId>transactions-jta</artifactId>
-            <version>4.0.4</version>
-            <scope>provided</scope>
-        </dependency>
+        <!-- Dependency injection: JTA -->
+
 
 
         <!-- Documentação: Swagger -->

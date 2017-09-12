@@ -4,7 +4,6 @@ package vetorlog.model.util.relational;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import vetorlog.conf.Constants;
-import vetorlog.conf.EnvironmentType;
 import vetorlog.conf.PersistenceContextType;
 import vetorlog.model.prototype.Model;
 
