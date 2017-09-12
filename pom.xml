@@ -81,7 +81,7 @@
                 <version>${maven-war-plugin.version}</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <webappDirectory>src/webapp</webappDirectory>
+                    <webappDirectory>src/webapp/vetorlog-angular</webappDirectory>
                 </configuration>
                 <executions>
                     <execution>

@@ -5,3 +5,4 @@ target/
 src/webapp/WEB-INF
 .gitignore
 swagger
+vetorlog-angular
