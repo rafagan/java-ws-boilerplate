@@ -3,3 +3,4 @@ new-econometer.iml
 target/
 
 src/webapp/WEB-INF
+Would skip repository src/webapp/

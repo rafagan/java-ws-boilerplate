@@ -36,3 +36,4 @@ ambiente na IDE. Aqui, também ficarão os comandos de criação de arquivos de 
 Boleiplate
 
 Swagger: Descrição de como setar o swagger.json
+Falar do context.xml do META-INF do webapp
