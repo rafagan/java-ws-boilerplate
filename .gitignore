@@ -3,8 +3,3 @@ new-econometer.iml
 target/
 
 src/webapp/WEB-INF
-.gitignore
-swagger
-vetorlog-angular
-src/webapp/
-!src/webapp/swagger
