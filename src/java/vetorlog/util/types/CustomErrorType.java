@@ -1,4 +1,4 @@
-package vetorlog.api.util;
+package vetorlog.util.types;
 
 public enum CustomErrorType {
 

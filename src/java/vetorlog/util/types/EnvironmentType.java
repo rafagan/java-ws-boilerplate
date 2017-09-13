@@ -1,4 +1,4 @@
-package vetorlog.conf;
+package vetorlog.util.types;
 
 public enum EnvironmentType {
     LOCAL ("local"),

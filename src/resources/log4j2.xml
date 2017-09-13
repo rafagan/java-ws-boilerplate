@@ -18,14 +18,14 @@
 
     <Loggers>
         <Root level="ALL">
-            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Console" />
             <AppenderRef ref="File" />
             <appender-ref ref="Sentry"/>
         </Root>
 
         <Logger name="vetorlog" level="ALL" additivity="false">
             <AppenderRef ref="Console" />
-            <appender-ref ref="Sentry"/>
+            <appender-ref ref="Sentry" />
         </Logger>
 
         <Logger name="org.hibernate" level="INFO" additivity="false">

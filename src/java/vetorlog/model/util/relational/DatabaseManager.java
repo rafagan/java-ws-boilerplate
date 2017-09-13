@@ -3,9 +3,11 @@ package vetorlog.model.util.relational;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import vetorlog.conf.Constants;
-import vetorlog.conf.PersistenceContextType;
+import vetorlog.conf.Constant;
+import vetorlog.model.prototype.IModel;
 import vetorlog.model.prototype.Model;
+import vetorlog.model.prototype.ModelLong;
+import vetorlog.util.types.PersistenceContextType;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -23,10 +25,10 @@ public class DatabaseManager {
     @Inject
     private IEntityManagerWrapper emw;
 
-    private <T> boolean hasValidId(T id) {
-        if(id instanceof Number)
-            return ((Number) id).intValue() != 0;
-        return id != null;
+    private <T> boolean hasValidId(T model) {
+        if(model instanceof ModelLong)
+            return (((ModelLong) model).getId()).intValue() != 0;
+        return ((Model) model).getId() != null;
     }
 
     /**
@@ -36,11 +38,11 @@ public class DatabaseManager {
      */
     public EntityManager getEntityManager() {
         if(emw == null) {
-            if(Constants.DATABASE_CONTEXT == PersistenceContextType.JTA)
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.JTA)
                 log.warn("JTA persistence context has been set, but the entity manager is being created without " +
                         "dependency injection");
 
-            switch (Constants.ENVIRONMENT) {
+            switch (Constant.ENVIRONMENT) {
                 case LOCAL:
                     emw = new WrapperLocal();
                     break;
@@ -59,7 +61,7 @@ public class DatabaseManager {
 
         if(emw.getEntityManager() == null) {
             log.warn(String.format("Wrapper of environment type %s has a null EntityManager, verify if it's being " +
-                    "injected and configured properly. For now, using default.", Constants.ENVIRONMENT));
+                    "injected and configured properly. For now, using default.", Constant.ENVIRONMENT));
             emw = new WrapperDefault();
         }
 
@@ -81,13 +83,13 @@ public class DatabaseManager {
      * @return Objeto relido
      */
     @Transactional
-    public <T extends Model> T reload(T object) {
-        if(Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+    public <T extends IModel> T reload(T object) {
+        if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
             this.getEntityManager().getTransaction().begin();
 
         this.getEntityManager().refresh(object);
 
-        if(Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+        if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
             this.getEntityManager().getTransaction().commit();
             this.getEntityManager().close();
         }
@@ -101,24 +103,24 @@ public class DatabaseManager {
      * @return Objeto relido com valores do banco
      */
     @Transactional
-    public <T extends Model> T insert(T object) {
-        if (this.hasValidId(object.getId()))
+    public <T extends IModel> T insert(T object) {
+        if (this.hasValidId(object))
             return update(object);
 
         try {
-            if (Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().begin();
 
             this.getEntityManager().persist(object);
             this.getEntityManager().flush();
             this.getEntityManager().refresh(object);
 
-            if (Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+            if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
                 this.getEntityManager().getTransaction().commit();
                 this.getEntityManager().close();
             }
         } catch(Exception e) {
-            if (Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().rollback();
             throw e;
         }
@@ -132,20 +134,20 @@ public class DatabaseManager {
      * @return Objeto atualizado
      */
     @Transactional
-    public <T extends Model> T update(T object) {
+    public <T extends IModel> T update(T object) {
         try {
-            if(Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().begin();
 
             object = this.getEntityManager().merge(object);
 
-            if(Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
                 this.getEntityManager().getTransaction().commit();
                 this.getEntityManager().close();
             }
 
         } catch(Exception e) {
-            if (Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().rollback();
             throw e;
         }
@@ -158,20 +160,20 @@ public class DatabaseManager {
      * @param object Objeto a ser deletado
      */
     @Transactional
-    public <T extends Model> void delete(T object) {
+    public <T extends IModel> void delete(T object) {
         try {
-            if(Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().begin();
 
             T a = this.getEntityManager().merge(object);
             this.getEntityManager().remove(a);
 
-            if(Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
                 this.getEntityManager().getTransaction().commit();
                 this.getEntityManager().close();
             }
         } catch(Exception e) {
-            if (Constants.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+            if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().rollback();
             throw e;
         }
@@ -183,7 +185,7 @@ public class DatabaseManager {
      * @return Lista dos objetos cadastrados
      */
     @SuppressWarnings({"unchecked"})
-    public <T extends Model> List<T> all(Class<T> objectClass) {
+    public <T extends IModel> List<T> all(Class<T> objectClass) {
         Query query = this.getEntityManager().createQuery(
                 "SELECT t FROM " + objectClass.getName() + " AS t"
         );
@@ -196,7 +198,7 @@ public class DatabaseManager {
      * @param id O id do object a ser buscado
      * @return Objeto encontrado
      */
-    public <T extends Model, U> T find(Class<T> objectClass, U id) {
+    public <T extends IModel, U> T find(Class<T> objectClass, U id) {
         try {
             return this.getEntityManager().find(objectClass, id);
         } catch (NoResultException e) {
@@ -211,7 +213,7 @@ public class DatabaseManager {
      * @return Lista dos objetos encontrados
      */
     @SuppressWarnings({"unchecked"})
-    public <T extends Model, U> List<T> find(Class<T> objectClass, List<U> ids) {
+    public <T extends IModel, U> List<T> find(Class<T> objectClass, List<U> ids) {
         if(ids.isEmpty()) return new ArrayList<>();
         
         Query query = this.getEntityManager().createQuery(
@@ -228,7 +230,7 @@ public class DatabaseManager {
      * @return Lista dos objetos resultantes da consulta
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> List<T> find(String queryString, Map<String, Object> queryParameters) {
+    public <T extends IModel> List<T> find(String queryString, Map<String, Object> queryParameters) {
         Query query = this.getEntityManager().createQuery(queryString);
 
         if(queryParameters != null)
@@ -249,7 +251,7 @@ public class DatabaseManager {
      * @return Lista de objetos resultates da consulta
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> List<T> find(String queryString, Map<String, Object> queryParameters, int page, int size) {
+    public <T extends IModel> List<T> find(String queryString, Map<String, Object> queryParameters, int page, int size) {
         Query query = this.getEntityManager().createQuery(queryString);
 
         if(queryParameters != null)
@@ -269,7 +271,7 @@ public class DatabaseManager {
      * @param size Tamanho da página
      * @return Lista de objetos resultates da consulta
      */
-    public <T extends Model> List<T> find(TypedQuery<T> query, int page, int size) {
+    public <T extends IModel> List<T> find(TypedQuery<T> query, int page, int size) {
         query.setFirstResult(page * size);
         query.setMaxResults(size);
 
@@ -295,7 +297,7 @@ public class DatabaseManager {
      * @param objectClass Classe JPA da tabela
      * @return Quantidade de elementos
      */
-    public <T extends Model> int count(Class<T> objectClass) {
+    public <T extends IModel> int count(Class<T> objectClass) {
         Query query = this.getEntityManager().createQuery("SELECT COUNT(*) FROM " + objectClass.getName());
         return Integer.valueOf(query.getSingleResult().toString());
     }
@@ -306,7 +308,7 @@ public class DatabaseManager {
      * @return Objeto do primeiro elemento encontrado
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> T first(Class<T> objectClass) {
+    public <T extends IModel> T first(Class<T> objectClass) {
         Query query = this.getEntityManager().createQuery("SELECT n FROM " + objectClass.getName() + " AS n");
         List<T> list = this.find(query, 0, 1);
 
@@ -321,7 +323,7 @@ public class DatabaseManager {
      * @return Objeto do primeiro elemento encontrado
      */
     @SuppressWarnings("unchecked")
-    public <T extends Model> T first(String queryString, Map<String, Object> queryParameters) {
+    public <T extends IModel> T first(String queryString, Map<String, Object> queryParameters) {
         return (T) find(queryString, queryParameters).stream().findFirst().orElse(null);
 
     }
@@ -330,7 +332,7 @@ public class DatabaseManager {
      * Retorna o primeiro resultado da query, utilizando TypedQuery
      * @return Objeto do primeiro elemento encontrado
      */
-    public <T extends Model> T first(TypedQuery<T> query) {
+    public <T extends IModel> T first(TypedQuery<T> query) {
         return query.getResultList().stream().findFirst().orElse(null);
     }
 }

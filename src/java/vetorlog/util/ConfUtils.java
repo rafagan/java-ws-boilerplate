@@ -3,8 +3,8 @@ package vetorlog.util;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.w3c.dom.Document;
-import vetorlog.conf.Constants;
-import vetorlog.conf.PersistenceContextType;
+import vetorlog.conf.Constant;
+import vetorlog.util.types.PersistenceContextType;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,7 +16,7 @@ public class ConfUtils {
     @SuppressWarnings("ConstantConditions")
     public static PersistenceContextType readDatabaseContextFromPersistenceXml() {
         try {
-            String globalName = String.format("%s_%s", Constants.EMETER_APP_DATABASE, Constants.EMETER_APP_ENVIRONMENT);
+            String globalName = String.format("%s_%s", Constant.EMETER_APP_DATABASE, Constant.EMETER_APP_ENVIRONMENT);
 
             String persistenceConfigPath = ConfUtils.class.getClassLoader()
                     .getResource("META-INF/persistence.xml").getFile();

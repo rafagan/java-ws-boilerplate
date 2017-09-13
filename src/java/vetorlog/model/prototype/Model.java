@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 @MappedSuperclass
 @EqualsAndHashCode(of = "id")
-public class Model {
+public class Model implements IModel {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     private String id;

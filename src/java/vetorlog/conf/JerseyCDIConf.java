@@ -1,14 +1,13 @@
-package vetorlog.conf.cdi;
+package vetorlog.conf;
 
 import lombok.extern.log4j.Log4j2;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import vetorlog.conf.Constants;
 import vetorlog.controller.ExampleController;
 import vetorlog.model.queries.ExampleQuery;
 import vetorlog.model.util.relational.*;
 
 @Log4j2
-public class JerseyCDIAppBinder extends AbstractBinder {
+public class JerseyCDIConf extends AbstractBinder {
     @SuppressWarnings("RedundantToBinding")
     @Override
     protected void configure() {
@@ -16,7 +15,7 @@ public class JerseyCDIAppBinder extends AbstractBinder {
         bind(ExampleController.class).to(ExampleController.class);
         bind(ExampleQuery.class).to(ExampleQuery.class);
 
-        switch(Constants.ENVIRONMENT) {
+        switch(Constant.ENVIRONMENT) {
             case LOCAL:
                 bind(WrapperLocal.class).to(IEntityManagerWrapper.class);
                 break;

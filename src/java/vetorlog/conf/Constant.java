@@ -1,12 +1,16 @@
 package vetorlog.conf;
 
 import lombok.extern.log4j.Log4j2;
+import vetorlog.util.types.EnvironmentType;
+import vetorlog.util.types.PersistenceContextType;
 
 import static vetorlog.util.ConfUtils.readDatabaseContextFromPersistenceXml;
 
 @Log4j2
-public class Constants {
+public class Constant {
     public static final String DEFAULT_PAGE_SIZE = "100";
+    public final static int SALT_ITERATION_NUMBER = 1000;
+
     public static final String EMETER_APP_DATABASE = initDatabaseName();
     public static final String EMETER_APP_ENVIRONMENT = initEnvironmentName();
     public static final EnvironmentType ENVIRONMENT = initEnvironment();
@@ -27,7 +31,7 @@ public class Constants {
 
     private static EnvironmentType initEnvironment() {
         try {
-            return EnvironmentType.valueOf(Constants.EMETER_APP_ENVIRONMENT.toUpperCase());
+            return EnvironmentType.valueOf(Constant.EMETER_APP_ENVIRONMENT.toUpperCase());
         } catch(NullPointerException e) {
             log.warn("EMETER_APP_ENVIRONMENT is not set, please run the commands from one of the shell scripts " +
                     "to set appropriately the environment variables. See README.md for more details.");

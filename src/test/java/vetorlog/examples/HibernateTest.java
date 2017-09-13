@@ -35,7 +35,7 @@ class HibernateTest extends ResourceLocalTestConfig {
     @Test
     void queryTest() {
         val em = dbManager.getEntityManager();
-        List<ExampleModel> models = dbManager.find(em.createQuery(
+        val models = dbManager.find(em.createQuery(
                 "SELECT m FROM ExampleModel AS m", ExampleModel.class), 0, 100);
 
         for(val model : models)

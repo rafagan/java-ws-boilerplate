@@ -2,6 +2,8 @@ package vetorlog.api.util;
 
 import vetorlog.dto.error.DetailedError;
 import vetorlog.dto.error.Unauthorized;
+import vetorlog.dto.error.Error;
+import vetorlog.util.types.CustomErrorType;
 
 import javax.ws.rs.core.Response;
 

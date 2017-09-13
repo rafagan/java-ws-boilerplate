@@ -58,4 +58,18 @@ class SentryTest {
         log.debug("Teste");
         log.fatal("Teste");
     }
+
+    void theException() {
+        throw new NullPointerException("Eita");
+    }
+
+    @Test
+    void testLogSentryException() {
+        try {
+            theException();
+        } catch (NullPointerException e) {
+            log.fatal(e);
+            new SentryLogger().exception(e);
+        }
+    }
 }

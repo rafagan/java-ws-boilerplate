@@ -23,6 +23,9 @@
         <jaxrs.version>2.1</jaxrs.version>
         <javax.persistence.version>2.2.0</javax.persistence.version>
 
+        <!-- Apache -->
+        <apache.codec.version>1.10</apache.codec.version>
+
         <!-- Third Party Apps -->
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
         <junit.jupiter.version>5.0.0-RC3</junit.jupiter.version>
@@ -236,7 +239,7 @@
             <version>${lombok.version}</version>
         </dependency>
 
-        <!-- Documentação: Swagger -->
+        <!-- Documentation: Swagger -->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-core</artifactId>
@@ -251,6 +254,13 @@
             <groupId>io.swagger</groupId>
             <artifactId>swagger-models</artifactId>
             <version>${swagger.version}</version>
+        </dependency>
+
+        <!-- Security -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${apache.codec.version}</version>
         </dependency>
     </dependencies>
 </project>

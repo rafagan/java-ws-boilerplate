@@ -4,9 +4,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
-import vetorlog.conf.Constants;
+import vetorlog.conf.Constant;
 import vetorlog.controller.ExampleController;
-import vetorlog.model.util.relational.DatabaseManager;
 
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
@@ -30,7 +29,7 @@ public class ExampleAPI {
                     int page,
             @QueryParam("size")
             @Size(min = 1)
-            @DefaultValue(Constants.DEFAULT_PAGE_SIZE)
+            @DefaultValue(Constant.DEFAULT_PAGE_SIZE)
                     int size)
     {
         // Utilizar para testar a captura de erros do Sentry
