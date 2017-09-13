@@ -1,5 +1,5 @@
 .idea
-new-econometer.iml
+*.iml
 target/
 
 src/webapp/WEB-INF
