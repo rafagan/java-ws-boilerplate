@@ -22,7 +22,6 @@
         <javax.servlet.version>4.0.0</javax.servlet.version>
         <jaxrs.version>2.1</jaxrs.version>
         <javax.persistence.version>2.2.0</javax.persistence.version>
-        <!--<javax.ejb.version>3.2</javax.ejb.version>-->
 
         <!-- Third Party Apps -->
         <junit.platform.version>1.0.0-RC3</junit.platform.version>
@@ -236,10 +235,6 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
-
-        <!-- Dependency injection: JTA -->
-
-
 
         <!-- Documentação: Swagger -->
         <dependency>
