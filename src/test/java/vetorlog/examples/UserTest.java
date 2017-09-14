@@ -21,10 +21,10 @@ class UserTest extends ResourceLocalTestConfig {
             String domain = domains[rand.nextInt(domains.length)];
 
             model.setEmail(String.format("%s@%s.com", host, domain));
-            model.setUsername(host);
-            model.setPassword(PasswordUtils.genHashPassword(domain, null));
+            model.setName(host);
+            model.setPassword(PasswordUtils.generateHashPassword(domain, null));
 
-            if(new UserQuery(dbManager).findUserByEmail(model.getEmail()) == null)
+            if(new UserQuery().findUserByEmail(model.getEmail()) == null)
                 dbManager.insert(model);
         }
     }

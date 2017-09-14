@@ -59,7 +59,7 @@ public class PasswordUtils {
      *             Se for null, gera o salt, caso contrário o utiliza para gerar o password para comparação
      * @return the generated token
      */
-    public static String genHashPassword(String password, String salt) throws Exception {
+    public static String generateHashPassword(String password, String salt) throws Exception {
         salt = salt != null ? salt : genSalt();
         byte[] bSalt = base64ToByte(salt);
         byte[] bDigest = genPasswordHashWithSalt(Constant.SALT_ITERATION_NUMBER, password, bSalt);
@@ -76,7 +76,7 @@ public class PasswordUtils {
     }
 
     public static boolean checkPassword(String password) throws Exception {
-        String rawHash = PasswordUtils.genHashPassword(password, readSalt(password));
+        String rawHash = PasswordUtils.generateHashPassword(password, readSalt(password));
         return password != null && rawHash.equals(password);
     }
 }

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 public class UserModel extends Model {
     @Column
-    private String username;
+    private String name;
     @Column
     private String email;
     @Column

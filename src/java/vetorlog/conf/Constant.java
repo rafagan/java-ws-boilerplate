@@ -19,6 +19,10 @@ public class Constant {
     public static final Set<String> SUPPORTED_LANGUAGES = new HashSet<>(Arrays.asList("pt", "en"));
     public static final Set<String> SUPPORTED_COUNTRIES = new HashSet<>(Arrays.asList("BR", "US"));
 
+    public static final String CODE_ERROR_400 = "An error has ocurred";
+    public static final String CODE_ERROR_500 = "An internal error has ocurred";
+    public static final String CODE_ERROR_401 = "Unauthorized access";
+
     public static final String EMETER_APP_DATABASE = initDatabaseName();
     public static final String EMETER_APP_ENVIRONMENT = initEnvironmentName();
     public static final EnvironmentType ENVIRONMENT = initEnvironment();

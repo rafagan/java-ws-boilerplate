@@ -3,7 +3,6 @@ package vetorlog.api.interceptor;
 import vetorlog.api.util.ResponseFactory;
 import vetorlog.api.util.UserTokenUtils;
 import vetorlog.conf.Constant;
-import vetorlog.manager.DatabaseManager;
 import vetorlog.manager.I18nManager;
 import vetorlog.model.UserModel;
 import vetorlog.model.queries.UserQuery;

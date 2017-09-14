@@ -12,15 +12,11 @@ import java.util.List;
 
 @Service
 @NoArgsConstructor
-@AllArgsConstructor
-public class ExampleQuery {
-    @Inject
-    private DatabaseManager dbManager;
-
+public class ExampleQuery extends DatabaseManager {
     public List<ExampleModel> filterByInterval(int interval, int page, int size) {
-        TypedQuery<ExampleModel> query = dbManager.getEntityManager().createQuery(
+        TypedQuery<ExampleModel> query = getEntityManager().createQuery(
                 "SELECT m FROM ExampleModel AS m WHERE m.valueDouble < :interval", ExampleModel.class);
         query.setParameter("interval", (double)interval);
-        return dbManager.find(query, page, size);
+        return find(query, page, size);
     }
 }

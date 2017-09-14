@@ -5,7 +5,6 @@ import vetorlog.api.util.ResponseFactory;
 import vetorlog.dto.ExampleDTO;
 import vetorlog.model.ExampleModel;
 import vetorlog.model.queries.ExampleQuery;
-import vetorlog.manager.DatabaseManager;
 import vetorlog.serializer.ExampleSerializer;
 
 import javax.inject.Inject;
@@ -14,9 +13,6 @@ import java.util.List;
 
 @Service
 public class ExampleController {
-    @Inject
-    private DatabaseManager dbManager;
-
     @Inject
     private ExampleQuery query;
 
