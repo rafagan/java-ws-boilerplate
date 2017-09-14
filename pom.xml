@@ -26,9 +26,13 @@
         <!-- Apache -->
         <apache.codec.version>1.10</apache.codec.version>
 
+        <!-- JUnit -->
+        <junit.platform.version>1.0.0</junit.platform.version>
+        <junit.jupiter.version>5.0.0</junit.jupiter.version>
+        <junit.vintage.version>4.12.0</junit.vintage.version>
+        <junit.legacy.version>4.12</junit.legacy.version>
+
         <!-- Third Party Apps -->
-        <junit.platform.version>1.0.0-RC3</junit.platform.version>
-        <junit.jupiter.version>5.0.0-RC3</junit.jupiter.version>
         <log4j.version>2.9.0</log4j.version>
         <jaxrs.jersey.version>2.25.1</jaxrs.jersey.version>
         <hibernate.version>5.2.10.Final</hibernate.version>
@@ -39,6 +43,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <swagger.version>1.5.16</swagger.version>
         <jsonwebtoken.version>0.7.0</jsonwebtoken.version>
+        <reflections.version>0.9.11</reflections.version>
     </properties>
 
     <build>
@@ -158,6 +163,22 @@
             <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.vintage.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--
+            Por algum motivo estranho, o IntelliJ precisou do JUnit antigo também para rodar (atualizei a IDE).
+            Em breve isso provavelmente não será mais necessário (como não era também antes)
+         -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.legacy.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- REST JaxRS: Jersey 2 -->
         <dependency>
@@ -273,7 +294,7 @@
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
+            <version>${reflections.version}</version>
         </dependency>
     </dependencies>
 </project>

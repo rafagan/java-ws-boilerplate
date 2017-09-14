@@ -9,13 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="User")
+@Table(name="Role")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class RoleModel extends ModelLong {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private Set<UserModel> users = new HashSet<>();
 }

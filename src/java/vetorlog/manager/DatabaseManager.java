@@ -26,11 +26,11 @@ import java.util.Map;
 @Service
 public class DatabaseManager {
     @Inject
-    private IEntityManagerWrapper emw;
+    protected IEntityManagerWrapper emw;
 
     private <T> boolean hasValidId(T model) {
         if(model instanceof ModelLong)
-            return (((ModelLong) model).getId()).intValue() != 0;
+            return (((ModelLong) model).getId()) != 0L;
         return ((Model) model).getId() != null;
     }
 

@@ -1,8 +1,10 @@
 package vetorlog.examples;
 
 import org.junit.jupiter.api.Test;
+import vetorlog.model.RoleModel;
 import vetorlog.model.UserModel;
 import vetorlog.model.queries.UserQuery;
+import vetorlog.model.util.relational.WrapperDefault;
 import vetorlog.util.PasswordUtils;
 
 import java.util.Random;
@@ -15,6 +17,10 @@ class UserTest extends ResourceLocalTestConfig {
     void insertUserTest() throws Exception {
         Random rand = new Random();
 
+        RoleModel role = new RoleModel();
+        role.setName("Admin");
+        role = dbManager.insert(role);
+
         for(int i = 0; i < 10; i++) {
             UserModel model = new UserModel();
             String host = hosts[rand.nextInt(hosts.length)];
@@ -23,8 +29,9 @@ class UserTest extends ResourceLocalTestConfig {
             model.setEmail(String.format("%s@%s.com", host, domain));
             model.setName(host);
             model.setPassword(PasswordUtils.generateHashPassword(domain, null));
+            model.setRole(role);
 
-            if(new UserQuery().findUserByEmail(model.getEmail()) == null)
+            if(new UserQuery(new WrapperDefault()).findUserByEmail(model.getEmail()) == null)
                 dbManager.insert(model);
         }
     }

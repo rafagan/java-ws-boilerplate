@@ -3,10 +3,7 @@ package vetorlog.model;
 import lombok.*;
 import vetorlog.model.prototype.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="User")
@@ -22,6 +19,6 @@ public class UserModel extends Model {
     @Column
     private boolean isSuperUser;
 
-    @ManyToOne(optional = false)
-    private RoleModel roles;
+    @ManyToOne
+    private RoleModel role;
 }

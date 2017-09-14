@@ -10,11 +10,11 @@ import java.util.UUID;
 @Data
 @MappedSuperclass
 @EqualsAndHashCode(of = "id")
-public class ModelLong {
+public class ModelLong implements IModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
