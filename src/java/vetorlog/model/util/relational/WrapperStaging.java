@@ -3,6 +3,7 @@ package vetorlog.model.util.relational;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jvnet.hk2.annotations.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,7 @@ import javax.persistence.PersistenceContext;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Service
 public class WrapperStaging implements IEntityManagerWrapper {
     public static EntityManagerFactory factory;
     private EntityManager em;

@@ -4,6 +4,7 @@ export EMETER_APP_DATABASE='mysql';
 export EMETER_APP_ENVIRONMENT='local';
 export EMETER_APP_URL='localhost:8080';
 export EMETER_APP_USE_SSL=0;
+export EMETER_APP_LOCALE='pt_BR'; # or en_US
 export SENTRY_DSN='https://1b55d22eb65b4ec9959eaffe8e63dc11:ec0b6b50c51547fdaac1ddaac12b3f68@sentry.io/215551';
 
 # Arquivo de log do sistema (rodar apenas uma vez)

@@ -1,13 +1,15 @@
-package vetorlog.model.util.relational;
+package vetorlog.manager;
 
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.jvnet.hk2.annotations.Service;
 import vetorlog.conf.Constant;
 import vetorlog.model.prototype.IModel;
 import vetorlog.model.prototype.Model;
 import vetorlog.model.prototype.ModelLong;
-import vetorlog.util.types.PersistenceContextType;
+import vetorlog.model.util.relational.*;
+import vetorlog.util.type.PersistenceContextType;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -21,6 +23,7 @@ import java.util.Map;
 
 @NoArgsConstructor
 @Log4j2
+@Service
 public class DatabaseManager {
     @Inject
     private IEntityManagerWrapper emw;

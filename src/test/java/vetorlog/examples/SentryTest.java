@@ -6,7 +6,7 @@ import io.sentry.event.UserBuilder;
 import lombok.extern.log4j.Log4j2;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
-import vetorlog.util.SentryLogger;
+import vetorlog.util.SentryUtils;
 
 @Log4j2
 class SentryTest {
@@ -48,7 +48,7 @@ class SentryTest {
 
     @Test
     void sendInfoData() {
-        SentryLogger logger = new SentryLogger();
+        SentryUtils logger = new SentryUtils();
         logger.addExtra("Teste", "123");
         logger.info("Teste", SentryTest.class);
     }
@@ -69,7 +69,7 @@ class SentryTest {
             theException();
         } catch (NullPointerException e) {
             log.fatal(e);
-            new SentryLogger().exception(e);
+            new SentryUtils().exception(e);
         }
     }
 }

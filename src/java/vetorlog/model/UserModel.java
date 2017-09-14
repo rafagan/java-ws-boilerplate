@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UserModel extends Model {
-    @Column(unique = true)
+    @Column
     private String username;
     @Column
     private String email;

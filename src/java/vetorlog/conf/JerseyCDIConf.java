@@ -1,19 +1,36 @@
 package vetorlog.conf;
 
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import vetorlog.controller.ExampleController;
-import vetorlog.model.queries.ExampleQuery;
+import org.jvnet.hk2.annotations.Contract;
+import org.jvnet.hk2.annotations.Service;
+import org.reflections.Reflections;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import vetorlog.manager.DatabaseManager;
 import vetorlog.model.util.relational.*;
+
+import java.util.Set;
 
 @Log4j2
 public class JerseyCDIConf extends AbstractBinder {
-    @SuppressWarnings("RedundantToBinding")
+    @SneakyThrows
+    private void automaticBinds() {
+        Reflections reflections = new Reflections(
+                new ConfigurationBuilder().setUrls(ClasspathHelper
+                        .forPackage("vetorlog")).setScanners(new TypeAnnotationsScanner()));
+        Set<Class<?>> classes = reflections.getTypesAnnotatedWith(Service.class, true);
+
+        for(val type: classes)
+            bind(Class.forName(type.getName())).to(Class.forName(type.getName()));
+    }
+
     @Override
     protected void configure() {
-        bind(DatabaseManager.class).to(DatabaseManager.class);
-        bind(ExampleController.class).to(ExampleController.class);
-        bind(ExampleQuery.class).to(ExampleQuery.class);
+        automaticBinds();
 
         switch(Constant.ENVIRONMENT) {
             case LOCAL:

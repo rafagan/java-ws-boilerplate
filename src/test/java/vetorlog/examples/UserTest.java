@@ -2,6 +2,7 @@ package vetorlog.examples;
 
 import org.junit.jupiter.api.Test;
 import vetorlog.model.UserModel;
+import vetorlog.model.queries.UserQuery;
 import vetorlog.util.PasswordUtils;
 
 import java.util.Random;
@@ -16,14 +17,15 @@ class UserTest extends ResourceLocalTestConfig {
 
         for(int i = 0; i < 10; i++) {
             UserModel model = new UserModel();
-            String host = hosts[rand.nextInt() % hosts.length];
-            String domain = domains[rand.nextInt() % hosts.length];
+            String host = hosts[rand.nextInt(hosts.length)];
+            String domain = domains[rand.nextInt(domains.length)];
 
             model.setEmail(String.format("%s@%s.com", host, domain));
             model.setUsername(host);
-            model.setPassword(PasswordUtils.genHashPassword(domain));
+            model.setPassword(PasswordUtils.genHashPassword(domain, null));
 
-            dbManager.insert(model);
+            if(new UserQuery(dbManager).findUserByEmail(model.getEmail()) == null)
+                dbManager.insert(model);
         }
     }
 }

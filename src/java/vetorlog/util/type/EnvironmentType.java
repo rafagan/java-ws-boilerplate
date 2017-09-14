@@ -1,12 +1,14 @@
-package vetorlog.util.types;
+package vetorlog.util.type;
 
-public enum PersistenceContextType {
-    RESOURCE_LOCAL ("resource_local"),
-    JTA ("jta");
+public enum EnvironmentType {
+    LOCAL ("local"),
+    STAGING ("staging"),
+    PRODUCTION ("production"),
+    UNDEFINED ("undefined");
 
     private final String name;
 
-    PersistenceContextType(String s) {
+    EnvironmentType(String s) {
         name = s;
     }
 

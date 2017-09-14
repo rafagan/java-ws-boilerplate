@@ -38,6 +38,7 @@
         <sentry.version>1.5.3</sentry.version>
         <slf4j.version>1.7.25</slf4j.version>
         <swagger.version>1.5.16</swagger.version>
+        <jsonwebtoken.version>0.7.0</jsonwebtoken.version>
     </properties>
 
     <build>
@@ -232,13 +233,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Boilerplate: Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-
         <!-- Documentation: Swagger -->
         <dependency>
             <groupId>io.swagger</groupId>
@@ -261,6 +255,25 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>${apache.codec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jsonwebtoken.version}</version>
+        </dependency>
+
+        <!-- Utils -->
+        <!-- Lombok: Boilerplate -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <!-- Reflections: Annotation processing and much more -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
         </dependency>
     </dependencies>
 </project>

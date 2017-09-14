@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Unauthorized extends Error {
+public class UnauthorizedErrorDTO extends ErrorDTO {
     private boolean critical;
 
-    public Unauthorized(String message, boolean critical) {
+    public UnauthorizedErrorDTO(String message, boolean critical) {
         super(message);
         this.critical = critical;
     }

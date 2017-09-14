@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Error {
+public class ErrorDTO {
     protected String message;
+
+    public String getMessage() {
+        return message;
+    }
 }

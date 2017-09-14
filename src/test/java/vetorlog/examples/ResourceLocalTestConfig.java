@@ -3,7 +3,7 @@ package vetorlog.examples;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import vetorlog.model.util.relational.DatabaseManager;
+import vetorlog.manager.DatabaseManager;
 import vetorlog.model.util.relational.WrapperDefault;
 
 class ResourceLocalTestConfig {
@@ -12,6 +12,7 @@ class ResourceLocalTestConfig {
     @BeforeEach
     void startTransaction() {
         dbManager = new DatabaseManager();
+        dbManager.setEntityManager(new WrapperDefault());
 //        dbManager.getEntityManager().getTransaction().begin();
     }
 

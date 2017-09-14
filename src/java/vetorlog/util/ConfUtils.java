@@ -4,7 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.w3c.dom.Document;
 import vetorlog.conf.Constant;
-import vetorlog.util.types.PersistenceContextType;
+import vetorlog.util.type.PersistenceContextType;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

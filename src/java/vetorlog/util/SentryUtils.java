@@ -5,7 +5,7 @@ import io.sentry.SentryClientFactory;
 import io.sentry.event.Event;
 import io.sentry.event.EventBuilder;
 
-public class SentryLogger {
+public class SentryUtils {
     private SentryClient sentryClient;
 
     private SentryClient getSentryClient() {
@@ -14,12 +14,12 @@ public class SentryLogger {
         return sentryClient;
     }
 
-    public SentryLogger addExtra(String key, Object value) {
+    public SentryUtils addExtra(String key, Object value) {
         getSentryClient().addExtra(key, value);
         return this;
     }
 
-    public SentryLogger addTag(String key, String value) {
+    public SentryUtils addTag(String key, String value) {
         getSentryClient().addTag(key, value);
         return this;
     }

@@ -2,6 +2,7 @@ package vetorlog.api;
 
 import vetorlog.api.util.ResponseFactory;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,12 +15,15 @@ import java.io.IOException;
 @Path("/swagger")
 public class SwaggerAPI {
     @Context
-    HttpServletResponse currentResponse;
+    private HttpServletResponse currentResponse;
+
+    @Inject
+    private ResponseFactory response;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Response indexPage() throws IOException {
         currentResponse.sendRedirect("/swagger/dist/");
-        return ResponseFactory.ok();
+        return response.ok();
     }
 }

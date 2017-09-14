@@ -12,10 +12,10 @@ import java.io.IOException;
 @Log4j2
 public class ResponseInterceptor implements ContainerResponseFilter {
     private void configureHeaders(ContainerResponseContext response) {
-        response.getHeaders().add("Access-Control-Allow-Origin", "*");
-        response.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
-        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-        response.getHeaders().add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, PATCH");
+//        response.getHeaders().add("Access-Control-Allow-Origin", "*");
+//        response.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
+//        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
+//        response.getHeaders().add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, PATCH");
     }
 
     @Override

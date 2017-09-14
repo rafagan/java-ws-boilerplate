@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -12,9 +14,10 @@ import javax.ws.rs.core.MediaType;
 @Log4j2
 @Path("v1/hello")
 public class HelloWorldAPI {
-    @ApiOperation(value = "Requisição GET", produces = MediaType.TEXT_PLAIN)
+    @ApiOperation(value = "Requisição GET", produces = MediaType.APPLICATION_JSON + ", " + MediaType.TEXT_PLAIN)
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
+    @DenyAll
     public String get() {
         String result = "Hello World GET";
         log.log(Level.INFO, result);

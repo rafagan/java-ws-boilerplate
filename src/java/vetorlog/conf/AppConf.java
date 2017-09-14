@@ -3,14 +3,19 @@ package vetorlog.conf;
 import io.sentry.Sentry;
 import io.swagger.jaxrs.config.BeanConfig;
 import lombok.extern.log4j.Log4j2;
+import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 
+import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
 
 @Log4j2
 @ApplicationPath("api")
 public class AppConf extends ResourceConfig {
+    @Inject
+    private ServiceLocator serviceLocator;
+
     private void confJersey2() {
         packages("vetorlog.api;");
         property(ServerProperties.TRACING, "ALL");

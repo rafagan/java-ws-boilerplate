@@ -1,63 +1,88 @@
 package vetorlog.api.util;
 
-import vetorlog.dto.error.DetailedError;
-import vetorlog.dto.error.Unauthorized;
-import vetorlog.dto.error.Error;
-import vetorlog.util.types.CustomErrorType;
+import org.jvnet.hk2.annotations.Service;
+import vetorlog.dto.error.DetailedErrorDTO;
+import vetorlog.dto.error.UnauthorizedErrorDTO;
+import vetorlog.dto.error.ErrorDTO;
+import vetorlog.util.type.CustomErrorType;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Service
 public class ResponseFactory {
-    public static Response ok() {
+    @Context
+    private HttpServletRequest request;
+
+    public Response ok() {
         return Response.ok().build();
     }
 
-    public static Response ok(Object dto) {
+    public Response ok(Object dto) {
         return Response.ok(dto).build();
     }
 
-    public static Response noContent() {
+    public Response noContent() {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    public static Response accepted(Object dto) {
+    public Response accepted(Object dto) {
         return Response.status(Response.Status.ACCEPTED).entity(dto).build();
     }
 
-    public static Response unauthorized(String message, boolean critical) {
-        return Response.status(Response.Status.UNAUTHORIZED).entity(new Unauthorized(message, critical)).build();
+    public Response unauthorized(String message, boolean critical) {
+        return Response.status(Response.Status.UNAUTHORIZED).entity(new UnauthorizedErrorDTO(message, critical)).build();
     }
 
-    public static Response notFound(String message) {
+    public Response notFound(String message) {
         return errorMessageResponse(Response.Status.NOT_FOUND, message);
     }
 
-    public static Response badRequest(String message) {
+    public Response badRequest(String message) {
         return errorMessageResponse(Response.Status.BAD_REQUEST, message);
     }
 
-    public static Response badRequest(String message, CustomErrorType customError, Object details) {
+    public Response badRequest(String message, CustomErrorType customError, Object details) {
         return errorMessageResponseDetailed(Response.Status.BAD_REQUEST, customError, message, details);
     }
 
-    public static Response internalServerError(String message) {
+    public Response internalServerError(String message) {
         return errorMessageResponse(Response.Status.INTERNAL_SERVER_ERROR, message);
     }
 
-    public static Response forbidden(String message) {
+    public Response forbidden(String message) {
         return errorMessageResponse(Response.Status.FORBIDDEN, message);
     }
 
-    private static Response errorMessageResponse(Response.StatusType status, String message) {
-        return Response.status(status).entity(new Error(message)).build();
+    private Response errorMessageResponse(Response.StatusType status, String message) {
+        String accept = request.getHeaders("Accept").nextElement();
+
+        switch (accept) {
+            case MediaType.APPLICATION_JSON:
+                return Response.status(status).entity(new ErrorDTO(message)).build();
+            case MediaType.TEXT_PLAIN:
+            default:
+                return Response.status(status).entity(message).build();
+        }
     }
 
-    private static Response errorMessageResponseDetailed(Response.StatusType status,
+    private Response errorMessageResponseDetailed(Response.StatusType status,
                                                          CustomErrorType customError,
                                                          String message,
                                                          Object details)
     {
-        return Response.status(status).entity(
-                new DetailedError(message, customError.toString(), details.toString())).build();
+        String accept = request.getHeaders("Accept").nextElement();
+
+        switch (accept) {
+            case MediaType.APPLICATION_JSON:
+                return Response.status(status).entity(
+                        new DetailedErrorDTO(message, customError.toString(), details.toString())).build();
+            case MediaType.TEXT_PLAIN:
+            default:
+                return Response.status(status).entity(message).build();
+        }
     }
 }
