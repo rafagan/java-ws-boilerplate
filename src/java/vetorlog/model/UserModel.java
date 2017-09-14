@@ -5,6 +5,7 @@ import vetorlog.model.prototype.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,4 +19,9 @@ public class UserModel extends Model {
     private String email;
     @Column
     private String password;
+    @Column
+    private boolean isSuperUser;
+
+    @ManyToOne(optional = false)
+    private RoleModel roles;
 }

@@ -34,7 +34,15 @@ public class ResponseFactory {
     }
 
     public Response unauthorized(String message, boolean critical) {
-        return Response.status(Response.Status.UNAUTHORIZED).entity(new UnauthorizedErrorDTO(message, critical)).build();
+        String accept = request.getHeaders("Accept").nextElement();
+
+        switch (accept) {
+            case MediaType.APPLICATION_JSON:
+                return Response.status(Response.Status.UNAUTHORIZED).entity(new UnauthorizedErrorDTO(message, critical)).build();
+            case MediaType.TEXT_PLAIN:
+            default:
+                return Response.status(Response.Status.UNAUTHORIZED).entity(message).build();
+        }
     }
 
     public Response notFound(String message) {

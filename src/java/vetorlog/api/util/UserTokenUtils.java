@@ -25,7 +25,7 @@ public class UserTokenUtils {
         }
     }
 
-    public static String generateTokenFromDictionary(String id, Map<String, String> map, Calendar calendar) {
+    public String generateTokenFromDictionary(String id, Map<String, String> map, Calendar calendar) {
         JwtBuilder tokenGen = Jwts.builder().setSubject(id).setExpiration(calendar.getTime());
 
         for(Map.Entry<String, String> x : map.entrySet())
