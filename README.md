@@ -38,4 +38,4 @@ Boleiplate
 Swagger: Descrição de como setar o swagger.json
 Falar do context.xml do META-INF do webapp
 
-Teste
+Configuração da integração do maven com o tomcat e comandos para deploy
