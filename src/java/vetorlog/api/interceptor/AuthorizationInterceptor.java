@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import vetorlog.manager.I18nManager;
 import vetorlog.model.UserModel;
+import vetorlog.util.type.RoleType;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -29,11 +31,17 @@ public class AuthorizationInterceptor implements SecurityContext {
         if(!exists)
             return false;
 
-        String role = user.getRole().getName();
         boolean isSuperUser = user.isSuperUser();
-        boolean allowed = role.equals(methodRole);
+        if(isSuperUser)
+            return true;
 
-        return isSuperUser || allowed;
+        boolean allowed = false;
+        if(Objects.equals(RoleType.USER, methodRole))
+            allowed = user.getRole().isUser();
+        else if(Objects.equals(RoleType.ADMIN, methodRole))
+            allowed = user.getRole().isAdmin();
+
+        return allowed;
 
     }
 

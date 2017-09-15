@@ -14,7 +14,13 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class RoleModel extends ModelLong {
     @Column
-    private String name; //TODO: mudar o nome para suportar apenas enum
+    private String name;
+
+    @Column
+    private boolean admin;
+
+    @Column
+    private boolean user;
 
     @OneToMany(mappedBy = "role")
     private Set<UserModel> users = new HashSet<>();
