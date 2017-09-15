@@ -7,6 +7,9 @@ import vetorlog.manager.I18nManager;
 import vetorlog.model.UserModel;
 
 import javax.annotation.Priority;
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -14,6 +17,7 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 @Provider
 @Priority(Priorities.AUTHENTICATION)
@@ -32,17 +36,27 @@ public class AuthenticationInterceptor implements ContainerRequestFilter {
         context.setProperty("i18n", new I18nManager(Constant.EMETER_APP_LOCALE, "responses"));
         I18nManager i18n = (I18nManager) context.getProperty("i18n");
 
-        //Fetch authorization header
-        final String token = context.getHeaderString("Authorization");
+        //Verify if is necessary authentication
+        Method method = resourceInfo.getResourceMethod();
+        if(method.isAnnotationPresent(PermitAll.class))
+            return;
+        if(method.isAnnotationPresent(DenyAll.class))
+            context.abortWith(response.forbidden(i18n.get("access_forbidden")));
 
-        //If no authorization information present: block access
-        if(token == null || token.isEmpty())
-            context.abortWith(response.unauthorized(i18n.get("unauthorized_token"), true));
+        //Verify user access
+        if(method.isAnnotationPresent(RolesAllowed.class)) {
+            //Fetch authorization header
+            final String token = context.getHeaderString("Authorization");
 
-        // Finally, initialize session variables
-        UserModel user = tokenUtils.readUser(token);
-        context.setProperty("user", user);
-        String scheme = context.getUriInfo().getRequestUri().getScheme();
-        context.setSecurityContext(new AuthorizationInterceptor(user, scheme, i18n));
+            //If no authorization information present: block access
+            if (token == null || token.isEmpty())
+                context.abortWith(response.unauthorized(i18n.get("unauthorized_token"), true));
+
+            // Finally, initialize session variables
+            UserModel user = tokenUtils.readUser(token);
+            context.setProperty("user", user);
+            String scheme = context.getUriInfo().getRequestUri().getScheme();
+            context.setSecurityContext(new AuthorizationInterceptor(user, scheme, i18n));
+        }
     }
 }
