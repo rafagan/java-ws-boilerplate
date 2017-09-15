@@ -1,7 +1,6 @@
 package vetorlog.api;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import vetorlog.conf.Constant;
@@ -13,15 +12,24 @@ import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
-@Api(value = "/example", description = "Exemplos de API mais complexos")
+@Api(
+    value = "/example",
+    description = "Exemplos de API mais complexos",
+    authorizations = {@Authorization(value="apiKey")}
+)
 @Log4j2
 @Path("v1/example")
 public class ExampleAPI {
     @Inject
     private ExampleController controller;
+
+    @Context
+    private Request request;
 
     @ApiOperation(value = "Requisição GET com query params e retorno de JSON", produces = MediaType.APPLICATION_JSON)
     @GET
@@ -42,7 +50,9 @@ public class ExampleAPI {
         return controller.get(interval, page, size);
     }
 
-    @ApiOperation(value = "Requisição POST, com login e geração de token com dados do header", produces = MediaType.TEXT_PLAIN)
+    @ApiOperation(
+            value = "Requisição POST, com login e geração de token com dados do header",
+            produces = MediaType.TEXT_PLAIN)
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     public String postToLogin() {

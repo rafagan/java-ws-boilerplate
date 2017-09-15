@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.jvnet.hk2.annotations.Service;
 import vetorlog.conf.Constant;
 import vetorlog.manager.DatabaseManager;
@@ -12,6 +13,7 @@ import vetorlog.model.UserModel;
 import javax.inject.Inject;
 
 @Service
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserTokenUtils {
     @Inject

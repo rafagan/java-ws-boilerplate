@@ -9,12 +9,17 @@ import vetorlog.util.type.RoleType;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 
 @Api(value = "/hello", description = "Hello World Jersey2/JaxRS e Swagger, com os principais verbos HTTP")
 @Log4j2
 @Path("v1/hello")
 public class HelloWorldAPI {
+    @Context
+    private Request request;
+
     private final String PRODUCES = MediaType.APPLICATION_JSON + ", " + MediaType.TEXT_PLAIN;
 
     @ApiOperation(value = "Requisição GET", produces = PRODUCES)

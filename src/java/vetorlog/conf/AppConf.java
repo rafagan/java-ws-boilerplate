@@ -2,6 +2,11 @@ package vetorlog.conf;
 
 import io.sentry.Sentry;
 import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.config.SwaggerContextService;
+import io.swagger.models.Swagger;
+import io.swagger.models.auth.ApiKeyAuthDefinition;
+import io.swagger.models.auth.BasicAuthDefinition;
+import io.swagger.models.auth.In;
 import lombok.extern.log4j.Log4j2;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -45,6 +50,10 @@ public class AppConf extends ResourceConfig {
 
         register(io.swagger.jaxrs.listing.ApiListingResource.class);
         register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+
+        Swagger swagger = new Swagger();
+        swagger.securityDefinition("apiKey", new ApiKeyAuthDefinition("Authorization", In.HEADER ));
+        new SwaggerContextService().updateSwagger(swagger);
     }
 
     public AppConf() {
