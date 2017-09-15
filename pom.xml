@@ -104,16 +104,15 @@
 
             <!-- Configurações de deploy: Dizem que funciona pra Tomcat 8 também a versão do Tomcat 7.
              Os plugins para a 8 estão alpha ainda -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <url>http://localhost:8080/manager/text</url>
-                    <server>TomcatServer</server>
-                    <!--<path>/teste</path>-->
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+                <!--<version>2.2</version>-->
+                <!--<configuration>-->
+                    <!--<url>http://localhost:8080/manager/text</url>-->
+                    <!--<server>TomcatServer</server>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

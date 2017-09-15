@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
-@Path("/swagger")
+@Path("swagger")
 public class SwaggerAPI {
     @Context
     private HttpServletResponse currentResponse;

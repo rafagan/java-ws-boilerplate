@@ -34,7 +34,7 @@ public class UserAPI {
             @ApiResponse(code = 401, message = Constant.CODE_ERROR_401, response = UnauthorizedErrorDTO.class),
     })
     @POST
-    @Path("/login")
+    @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
     public Response login(@ApiParam(name = "body") LoginDTO loginDTO) {
