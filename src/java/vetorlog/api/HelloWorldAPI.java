@@ -17,9 +17,6 @@ import javax.ws.rs.core.Request;
 @Log4j2
 @Path("v1/hello")
 public class HelloWorldAPI {
-    @Context
-    private Request request;
-
     private final String PRODUCES = MediaType.APPLICATION_JSON + ", " + MediaType.TEXT_PLAIN;
 
     @ApiOperation(value = "Requisição GET", produces = PRODUCES)

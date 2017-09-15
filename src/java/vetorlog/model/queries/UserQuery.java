@@ -23,10 +23,11 @@ public class UserQuery extends DatabaseManager {
         return first(query);
     }
 
-    public boolean isAdmin(UserModel user) {
+    public boolean hasRole(UserModel user, String role) {
         TypedQuery<UserModel> query = getEntityManager().createQuery(
-                "SELECT m FROM UserModel AS m WHERE m.id = :id AND m.role.name LIKE admin", UserModel.class);
-        query.setParameter("id", user);
+                "SELECT m FROM UserModel AS m WHERE m.id = :id AND m.role.name LIKE :role", UserModel.class);
+        query.setParameter("id", user.getId());
+        query.setParameter("role", role);
 
         UserModel result = first(query);
         return result != null;

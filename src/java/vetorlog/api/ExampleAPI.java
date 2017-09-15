@@ -28,9 +28,6 @@ public class ExampleAPI {
     @Inject
     private ExampleController controller;
 
-    @Context
-    private Request request;
-
     @ApiOperation(value = "Requisição GET com query params e retorno de JSON", produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,14 +61,14 @@ public class ExampleAPI {
     @ApiOperation(value = "Requisição PUT, com atualização de dados via JSON", produces = MediaType.TEXT_PLAIN)
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
-    @RolesAllowed({RoleType.ADMIN})
+    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
     public String putWithJson() {
         String result = "Hello World PUT";
         log.log(Level.INFO, result);
         return result;
     }
 
-    @RolesAllowed({RoleType.SUPERUSER})
+    @RolesAllowed({RoleType.USER})
     @ApiOperation(value = "Requisição DELETE, com deleção de arquivo por Path Param", produces = MediaType.TEXT_PLAIN)
     @DELETE
     public String deleteWithPathParam() {
