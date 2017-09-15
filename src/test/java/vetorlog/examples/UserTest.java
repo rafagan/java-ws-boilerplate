@@ -1,12 +1,15 @@
 package vetorlog.examples;
 
 import org.junit.jupiter.api.Test;
+import vetorlog.api.util.UserTokenUtils;
 import vetorlog.model.RoleModel;
 import vetorlog.model.UserModel;
 import vetorlog.model.queries.UserQuery;
 import vetorlog.model.util.relational.WrapperDefault;
 import vetorlog.util.PasswordUtils;
+import vetorlog.util.TokenUtils;
 
+import java.util.HashMap;
 import java.util.Random;
 
 class UserTest extends ResourceLocalTestConfig {
@@ -17,8 +20,9 @@ class UserTest extends ResourceLocalTestConfig {
     void insertUserTest() throws Exception {
         Random rand = new Random();
 
-        RoleModel role = new RoleModel();
-        role.setName("Admin");
+        RoleModel role = dbManager.findOrCreate(RoleModel.class, new HashMap<String, Object>() {{
+            put("name", "Admin");
+        }});
         role = dbManager.insert(role);
 
         for(int i = 0; i < 10; i++) {
@@ -34,5 +38,13 @@ class UserTest extends ResourceLocalTestConfig {
             if(new UserQuery(new WrapperDefault()).findUserByEmail(model.getEmail()) == null)
                 dbManager.insert(model);
         }
+    }
+
+    @Test
+    void readDataFromToken() {
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5ZTdiODAzZS02MDI5LTQ4MWMtODIzMS03OTdjNWE4ZTAwMGYiLCJzdWIiOiI5ZTdiODAzZS02MDI5LTQ4MWMtODIzMS03OTdjNWE4ZTAwMGYiLCJleHAiOjE1MTA2MTc2MjIsImlhdCI6MTUwNTQzNzIyMn0.CbGfMTOduh2AJ40Kb3bmNYMqXJemPI9BarKmP6EzxVg";
+        UserModel model = new UserTokenUtils(dbManager).readUser(token);
+        System.out.println(model.getName());
+        System.out.println(model.getEmail());
     }
 }

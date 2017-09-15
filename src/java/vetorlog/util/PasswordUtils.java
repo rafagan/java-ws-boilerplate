@@ -75,8 +75,8 @@ public class PasswordUtils {
         return password != null && password.contains("$");
     }
 
-    public static boolean checkPassword(String password) throws Exception {
-        String rawHash = PasswordUtils.generateHashPassword(password, readSalt(password));
-        return password != null && rawHash.equals(password);
+    public static boolean checkPassword(String password, String passwordHash) throws Exception {
+        String rawHash = PasswordUtils.generateHashPassword(password, readSalt(passwordHash));
+        return password != null && rawHash.equals(passwordHash);
     }
 }

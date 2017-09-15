@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
@@ -19,6 +20,7 @@ public class AppConf extends ResourceConfig {
     private void confJersey2() {
         packages("vetorlog.api;");
         property(ServerProperties.TRACING, "ALL");
+        register(RolesAllowedDynamicFeature.class);
     }
 
     private void confDependencyInjection() {

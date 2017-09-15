@@ -15,8 +15,10 @@ import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 @Api(value = "/user")
 @Log4j2
@@ -32,6 +34,7 @@ public class UserAPI {
             @ApiResponse(code = 401, message = Constant.CODE_ERROR_401, response = UnauthorizedErrorDTO.class),
     })
     @POST
+    @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
     public Response login(@ApiParam(name = "body") LoginDTO loginDTO) {

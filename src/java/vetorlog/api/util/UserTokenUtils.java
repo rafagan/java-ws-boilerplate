@@ -3,6 +3,7 @@ package vetorlog.api.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import lombok.AllArgsConstructor;
 import org.jvnet.hk2.annotations.Service;
 import vetorlog.conf.Constant;
 import vetorlog.manager.DatabaseManager;
@@ -11,6 +12,7 @@ import vetorlog.model.UserModel;
 import javax.inject.Inject;
 
 @Service
+@AllArgsConstructor
 public class UserTokenUtils {
     @Inject
     private DatabaseManager dbManager;

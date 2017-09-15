@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
@@ -26,7 +25,7 @@ import java.util.Set;
 
 @Provider
 public class SecurityInterceptor implements ContainerRequestFilter {
-    @Context
+    @javax.ws.rs.core.Context
     private ResourceInfo resourceInfo;
 
     @Inject
@@ -78,9 +77,11 @@ public class SecurityInterceptor implements ContainerRequestFilter {
             UserModel user = tokenUtils.readUser(token);
 
             //Is user valid?
-            if(isUserAllowed(user, rolesSet))
+            if(isUserAllowed(user, rolesSet)) {
                 context.setProperty("user", user);
-            else
+                String scheme = context.getUriInfo().getRequestUri().getScheme();
+                context.setSecurityContext(new SessionContext(user, scheme, i18n));
+            } else
                 context.abortWith(unauthorized);
         }
     }

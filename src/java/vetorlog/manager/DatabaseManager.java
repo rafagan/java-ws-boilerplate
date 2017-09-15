@@ -3,6 +3,7 @@ package vetorlog.manager;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.beanutils.BeanUtils;
 import org.jvnet.hk2.annotations.Service;
 import vetorlog.conf.Constant;
 import vetorlog.model.prototype.IModel;
@@ -17,6 +18,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,7 @@ public class DatabaseManager {
 
     private <T> boolean hasValidId(T model) {
         if(model instanceof ModelLong)
-            return (((ModelLong) model).getId()) != 0L;
+            return (((ModelLong) model).getId()) != 0;
         return ((Model) model).getId() != null;
     }
 
@@ -337,5 +339,48 @@ public class DatabaseManager {
      */
     public <T extends IModel> T first(TypedQuery<T> query) {
         return query.getResultList().stream().findFirst().orElse(null);
+    }
+
+    /**
+     * Procura o objeto no banco de dados dada o texto e dicionário e, caso não exista, cria
+     * @param objectClass Classe JPA da tabela
+     * @param queryParameters Parâmetros da pesquisa ou criação do objeto
+     * @return Objeto criado ou resultado da query
+     */
+    public <T extends IModel> T findOrCreate(Class<T> objectClass, Map<String, Object> queryParameters)
+            throws IllegalAccessException, InstantiationException, InvocationTargetException
+    {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT m FROM ");
+        query.append(objectClass.getSimpleName());
+        query.append(" AS m WHERE ");
+        int count = 0;
+        for(Map.Entry<String, Object> p: queryParameters.entrySet()) {
+            boolean isString = p.getValue() instanceof String;
+
+            query.append("m.");
+            query.append(p.getKey());
+            if(isString)
+                query.append(" LIKE ");
+            else
+                query.append(" = ");
+
+            query.append(":");
+            query.append(p.getKey());
+
+            count++;
+            if(count != queryParameters.size())
+                query.append(" AND ");
+        }
+
+        T object = first(query.toString(), queryParameters);
+        if(object != null)
+            return object;
+
+        object = objectClass.newInstance();
+        for(Map.Entry<String, Object> p: queryParameters.entrySet())
+            BeanUtils.setProperty(object, p.getKey(), p.getValue());
+
+        return insert(object);
     }
 }

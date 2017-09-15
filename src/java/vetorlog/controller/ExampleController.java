@@ -1,7 +1,7 @@
 package vetorlog.controller;
 
 import org.jvnet.hk2.annotations.Service;
-import vetorlog.api.util.ResponseFactory;
+import vetorlog.controller.prototype.Controller;
 import vetorlog.dto.ExampleDTO;
 import vetorlog.model.ExampleModel;
 import vetorlog.model.queries.ExampleQuery;
@@ -12,12 +12,9 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Service
-public class ExampleController {
+public class ExampleController extends Controller {
     @Inject
     private ExampleQuery query;
-
-    @Inject
-    private ResponseFactory response;
 
     public Response get(int interval, int page, int size) {
         List<ExampleModel> models = query.filterByInterval(interval, page, size);
