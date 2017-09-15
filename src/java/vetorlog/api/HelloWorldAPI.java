@@ -20,7 +20,6 @@ public class HelloWorldAPI {
     @ApiOperation(value = "Requisição GET", produces = PRODUCES)
     @GET
     @Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
-    @DenyAll
     public String get() {
         String result = "Hello World GET";
         log.log(Level.INFO, result);
@@ -39,7 +38,6 @@ public class HelloWorldAPI {
     @ApiOperation(value = "Requisição PUT", produces = PRODUCES)
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
-    @RolesAllowed({RoleType.SUPERUSER})
     public String put() {
         String result = "Hello World PUT";
         log.log(Level.INFO, result);
@@ -49,7 +47,6 @@ public class HelloWorldAPI {
     @ApiOperation(value = "Requisição DELETE", produces = MediaType.TEXT_PLAIN)
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
-    @RolesAllowed({RoleType.ADMIN})
     public String delete() {
         String result = "Hello World DELETE";
         log.log(Level.INFO, result);

@@ -6,7 +6,10 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import vetorlog.conf.Constant;
 import vetorlog.controller.ExampleController;
+import vetorlog.util.type.RoleType;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
@@ -39,23 +42,6 @@ public class ExampleAPI {
         return controller.get(interval, page, size);
     }
 
-    @ApiOperation(value = "Requisição DELETE, com deleção de arquivo por Path Param", produces = MediaType.TEXT_PLAIN)
-    @DELETE
-    public String deleteWithPathParam() {
-        String result = "Hello World DELETE";
-        log.log(Level.INFO, result);
-        return result;
-    }
-
-    @ApiOperation(value = "Requisição PUT, com atualização de dados via JSON", produces = MediaType.TEXT_PLAIN)
-    @PUT
-    @Produces(MediaType.TEXT_PLAIN)
-    public String putWithJson() {
-        String result = "Hello World PUT";
-        log.log(Level.INFO, result);
-        return result;
-    }
-
     @ApiOperation(value = "Requisição POST, com login e geração de token com dados do header", produces = MediaType.TEXT_PLAIN)
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -65,6 +51,26 @@ public class ExampleAPI {
         return result;
     }
 
+    @ApiOperation(value = "Requisição PUT, com atualização de dados via JSON", produces = MediaType.TEXT_PLAIN)
+    @PUT
+    @Produces(MediaType.TEXT_PLAIN)
+    @RolesAllowed({RoleType.ADMIN})
+    public String putWithJson() {
+        String result = "Hello World PUT";
+        log.log(Level.INFO, result);
+        return result;
+    }
+
+    @RolesAllowed({RoleType.SUPERUSER})
+    @ApiOperation(value = "Requisição DELETE, com deleção de arquivo por Path Param", produces = MediaType.TEXT_PLAIN)
+    @DELETE
+    public String deleteWithPathParam() {
+        String result = "Hello World DELETE";
+        log.log(Level.INFO, result);
+        return result;
+    }
+
+    @DenyAll
     @ApiOperation(value = "Requisição PATCH, com atualização de alguns campos via JSON, com validação", produces = MediaType.TEXT_PLAIN)
     @PATCH
     @Produces(MediaType.TEXT_PLAIN)
