@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name="tipologia_bombas")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"groupSites", "expectedPerformances"})
 public class TypologyPumpModel extends ModelLong {
     @Column(name = "descricao")
     private String description;

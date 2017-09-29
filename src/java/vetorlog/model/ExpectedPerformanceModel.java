@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="desempenho_esperado")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"user", "typologyPump"})
 public class ExpectedPerformanceModel extends ModelLong {
     @Column(name = "minimo")
     private double minimum;

@@ -4,7 +4,7 @@ import org.jvnet.hk2.annotations.Service;
 import vetorlog.controller.prototype.Controller;
 import vetorlog.dto.ExampleDTO;
 import vetorlog.model.ExampleModel;
-import vetorlog.model.adapters.ExampleAdapter;
+import vetorlog.model.adapter.ExampleAdapter;
 import vetorlog.serializer.ExampleSerializer;
 
 import javax.inject.Inject;

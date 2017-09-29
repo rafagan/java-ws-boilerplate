@@ -3,7 +3,7 @@ package vetorlog.insertion;
 import org.junit.jupiter.api.Test;
 import vetorlog.model.RoleModel;
 import vetorlog.model.UserModel;
-import vetorlog.model.adapters.UserAdapter;
+import vetorlog.model.adapter.UserAdapter;
 import vetorlog.model.util.relational.WrapperDefault;
 import vetorlog.conf.ResourceLocalTestConfig;
 import vetorlog.util.PasswordUtils;

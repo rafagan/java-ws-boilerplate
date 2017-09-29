@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name="groupsites")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"typologyPumps"})
 public class GroupSitesModel extends ModelLong {
     @Column(name = "nome")
     private String name;

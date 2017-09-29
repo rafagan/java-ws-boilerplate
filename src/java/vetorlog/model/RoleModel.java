@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name="Role")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"users"})
 public class RoleModel extends ModelLong {
     @Column(unique = true)
     private String name;

@@ -1,8 +1,12 @@
 package vetorlog.insertion;
 
+import lombok.val;
 import org.junit.jupiter.api.Test;
 import vetorlog.conf.ResourceLocalTestConfig;
+import vetorlog.model.GroupSitesModel;
 import vetorlog.model.TypologyPumpModel;
+
+import java.util.Random;
 
 public class TypologyPumpInsertion extends ResourceLocalTestConfig {
     private String[] descriptions = new String[]{"COMBO_TIPOLOGIA", "nome 1", "nome 2", "nome 3", "nome 4", "nome 5"};
@@ -18,5 +22,21 @@ public class TypologyPumpInsertion extends ResourceLocalTestConfig {
             model.setObservations(observation);
             dbManager.insert(model);
         }
+    }
+
+    @Test
+    void relateWithGroupSites() {
+        Random rand = new Random();
+        val groups = dbManager.all(GroupSitesModel.class);
+        val pumps = dbManager.all(TypologyPumpModel.class);
+
+        for(int i = 0; i < 30; i++) {
+            val group = groups.get(rand.nextInt(groups.size()));
+            val pump = pumps.get(rand.nextInt(pumps.size()));
+            group.getTypologyPumps().add(pump);
+        }
+
+        for(val group: groups)
+            dbManager.update(group);
     }
 }

@@ -1,4 +1,4 @@
-package vetorlog.model.adapters;
+package vetorlog.model.adapter;
 
 import lombok.NoArgsConstructor;
 import org.jvnet.hk2.annotations.Service;
