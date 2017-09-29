@@ -1,7 +1,8 @@
-package vetorlog.examples;
+package vetorlog.mvnignore;
 
 import lombok.val;
 import org.junit.jupiter.api.Test;
+import vetorlog.conf.ResourceLocalTestConfig;
 import vetorlog.model.ExampleModel;
 
 import java.util.HashMap;

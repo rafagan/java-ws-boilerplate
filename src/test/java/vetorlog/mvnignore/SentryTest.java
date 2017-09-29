@@ -1,8 +1,6 @@
-package vetorlog.examples;
+package vetorlog.mvnignore;
 
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
-import io.sentry.event.UserBuilder;
 import lombok.extern.log4j.Log4j2;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package vetorlog.examples;
+package vetorlog.conf;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import vetorlog.manager.DatabaseManager;
 import vetorlog.model.util.relational.WrapperDefault;
 
-class ResourceLocalTestConfig {
+public class ResourceLocalTestConfig {
     protected DatabaseManager dbManager;
 
     @BeforeEach

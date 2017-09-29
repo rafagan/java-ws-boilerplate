@@ -72,7 +72,8 @@
                 <configuration>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <excludes>
-                        <exclude>vetorlog/examples/**</exclude>
+                        <exclude>vetorlog/mvnignore/**</exclude>
+                        <exclude>vetorlog/mvnignore/**</exclude>
                     </excludes>
                 </configuration>
                 <dependencies>

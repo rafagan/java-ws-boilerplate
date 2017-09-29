@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class RoleModel extends ModelLong {
-    @Column
+    @Column(unique = true)
     private String name;
 
     @Column
