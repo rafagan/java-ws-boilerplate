@@ -11,8 +11,8 @@ public class ResourceLocalTestConfig {
 
     @BeforeEach
     void startTransaction() {
-        dbManager = new DatabaseManager();
-        dbManager.setEntityManager(new WrapperDefault());
+//        dbManager = new DatabaseManager();
+//        dbManager.setEntityManager(new WrapperDefault());
 //        dbManager.getEntityManager().getTransaction().begin();
     }
 

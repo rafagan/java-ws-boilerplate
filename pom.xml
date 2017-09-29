@@ -75,6 +75,7 @@
                         <exclude>vetorlog/mvnignore/**</exclude>
                         <exclude>vetorlog/mvnignore/**</exclude>
                     </excludes>
+                    <argLine>-Xmx1024m</argLine>
                 </configuration>
                 <dependencies>
                     <dependency>
