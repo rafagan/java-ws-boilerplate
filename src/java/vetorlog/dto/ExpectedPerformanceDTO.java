@@ -20,9 +20,12 @@ public class ExpectedPerformanceDTO {
     @JsonProperty("without_credibility")
     private double withoutCredibility;
 
-    @JsonProperty("user_id")
-    private String userId;
-
     @JsonProperty("created_at")
     private Date createdAt;
+
+    @JsonProperty(value = "user_id", required = true)
+    private String userId;
+
+    @JsonProperty(value = "typology_pump_id", access = JsonProperty.Access.WRITE_ONLY)
+    private String typologyPumpId;
 }

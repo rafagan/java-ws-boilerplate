@@ -6,8 +6,10 @@ import io.swagger.annotations.Authorization;
 import lombok.extern.log4j.Log4j2;
 import vetorlog.conf.Constant;
 import vetorlog.controller.GroupSiteController;
+import vetorlog.util.type.RoleType;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
@@ -30,7 +32,7 @@ public class GroupSiteAPI {
             produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
+    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
     public Response getGroupSites(
             @QueryParam("page")
                     int page,

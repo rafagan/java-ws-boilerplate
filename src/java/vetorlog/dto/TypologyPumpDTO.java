@@ -11,5 +11,4 @@ public class TypologyPumpDTO {
     private long id;
     private String description;
     private String observations;
-    private String userId;
 }

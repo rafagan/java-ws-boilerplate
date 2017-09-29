@@ -19,9 +19,6 @@ public class TypologyPumpModel extends ModelLong {
     @Column(name = "observacoes")
     private String observations;
 
-    @Column(name = "user_id")
-    private String userId;
-
     @ManyToMany(mappedBy = "typologyPumps")
     private Set<GroupSitesModel> groupSites;
 

@@ -20,17 +20,25 @@ public class ExpectedPerformanceController extends Controller {
     @Inject
     private ExpectedPerformanceAdapter dbAdapter;
 
+    @Inject
+    private ExpectedPerformanceSerializer serializer;
+
     public Response get(int typologyPumpId, int page, int size) {
         List<ExpectedPerformanceModel> models = dbAdapter.filterByTypologyPumpId(typologyPumpId, page, size);
-        List<ExpectedPerformanceDTO> data = ExpectedPerformanceSerializer.fromModelListToDTOList(models);
+        List<ExpectedPerformanceDTO> data = serializer.fromModelListToDTOList(models);
         return response.ok(data);
     }
 
     public Response post(ExpectedPerformanceDTO dto) {
-        return null;
+        ExpectedPerformanceModel model = serializer.fromDTOToModel(dto);
+        dbAdapter.insert(model);
+        return response.ok();
     }
 
-    public Response put(ExpectedPerformanceDTO dto) {
-        return null;
+    public Response put(long id, ExpectedPerformanceDTO dto) {
+        ExpectedPerformanceModel model = serializer.fromDTOToModel(dto);
+        model.setId(id);
+        dbAdapter.update(model);
+        return response.ok();
     }
 }

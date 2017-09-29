@@ -29,8 +29,8 @@ public class ExpectedPerformanceModel extends ModelLong {
     @Column(name = "sem_credibilidade")
     private double withoutCredibility;
 
-    @Column(name = "user_id")
-    private String userId;
+    @ManyToOne
+    private UserModel user;
 
     @ManyToOne
     @JoinColumn(name="tipologia_bomba_id")

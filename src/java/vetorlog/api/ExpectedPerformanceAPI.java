@@ -2,14 +2,14 @@ package vetorlog.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.Authorization;
 import lombok.extern.log4j.Log4j2;
 import vetorlog.conf.Constant;
 import vetorlog.controller.ExpectedPerformanceController;
 import vetorlog.dto.ExpectedPerformanceDTO;
+import vetorlog.util.type.RoleType;
 
-import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
@@ -32,7 +32,7 @@ public class ExpectedPerformanceAPI {
             produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
+    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
     public Response getExpectedPerformances(
             @QueryParam("typology_pump_id")
                     int typologyPumpId,
@@ -48,31 +48,29 @@ public class ExpectedPerformanceAPI {
 
     @ApiOperation(
             value = "Criação de desempenho esperado",
-            produces = MediaType.APPLICATION_JSON,
             consumes = MediaType.APPLICATION_JSON
     )
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @PermitAll
+    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
     public Response postExpectedPerformance(
-            @ApiParam ExpectedPerformanceDTO dto
+            ExpectedPerformanceDTO dto
     ) {
         return controller.post(dto);
     }
 
+    @Path("{id}")
     @ApiOperation(
             value = "Edição de desempenho esperado",
-            produces = MediaType.APPLICATION_JSON,
             consumes = MediaType.APPLICATION_JSON
     )
     @PUT
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @PermitAll
+    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
     public Response putExpectedPerformance(
-            @ApiParam ExpectedPerformanceDTO dto
+            @PathParam("id") long id,
+            ExpectedPerformanceDTO dto
     ) {
-        return controller.put(dto);
+        return controller.put(id, dto);
     }
 }

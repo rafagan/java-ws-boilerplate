@@ -12,7 +12,6 @@ public class TypologyPumpSerializer {
         dto.setId(model.getId());
         dto.setDescription(model.getDescription());
         dto.setObservations(model.getObservations());
-        dto.setUserId(model.getUserId());
 
         return dto;
     }

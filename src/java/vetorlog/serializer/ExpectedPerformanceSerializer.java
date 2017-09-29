@@ -1,13 +1,22 @@
 package vetorlog.serializer;
 
+import org.jvnet.hk2.annotations.Service;
 import vetorlog.dto.ExpectedPerformanceDTO;
+import vetorlog.manager.DatabaseManager;
 import vetorlog.model.ExpectedPerformanceModel;
+import vetorlog.model.TypologyPumpModel;
+import vetorlog.model.UserModel;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ExpectedPerformanceSerializer {
-    public static ExpectedPerformanceDTO fromModelToDTO(ExpectedPerformanceModel model) {
+    @Inject
+    private DatabaseManager dbManager;
+
+    public ExpectedPerformanceDTO fromModelToDTO(ExpectedPerformanceModel model) {
         ExpectedPerformanceDTO dto = new ExpectedPerformanceDTO();
         dto.setCreatedAt(model.getCreatedAt());
         dto.setMaximum(model.getMaximum());
@@ -15,13 +24,34 @@ public class ExpectedPerformanceSerializer {
         dto.setMinimum(model.getMinimum());
         dto.setSatisfactory(model.getSatisfactory());
         dto.setUnsatisfactory(model.getUnsatisfactory());
-        dto.setUserId(model.getUserId());
+        dto.setUserId(model.getUser().getId());
         dto.setWithoutCredibility(model.getWithoutCredibility());
 
         return dto;
     }
 
-    public static List<ExpectedPerformanceDTO> fromModelListToDTOList(List<ExpectedPerformanceModel> models) {
+    public ExpectedPerformanceModel fromDTOToModel(ExpectedPerformanceDTO dto) {
+        ExpectedPerformanceModel model = new ExpectedPerformanceModel();
+        model.setCreatedAt(dto.getCreatedAt());
+        model.setMaximum(dto.getMaximum());
+        model.setMedian(dto.getMedian());
+        model.setMinimum(dto.getMinimum());
+        model.setSatisfactory(dto.getSatisfactory());
+        model.setUnsatisfactory(dto.getUnsatisfactory());
+        model.setWithoutCredibility(dto.getWithoutCredibility());
+
+        if(dto.getTypologyPumpId() != null) {
+            TypologyPumpModel t = dbManager.find(TypologyPumpModel.class, dto.getTypologyPumpId());
+            model.setTypologyPump(t);
+        }
+
+        UserModel user = dbManager.find(UserModel.class, dto.getUserId());
+        model.setUser(user);
+
+        return model;
+    }
+
+    public List<ExpectedPerformanceDTO> fromModelListToDTOList(List<ExpectedPerformanceModel> models) {
         List<ExpectedPerformanceDTO> dtos = new ArrayList<>();
         for(ExpectedPerformanceModel model: models)
             dtos.add(fromModelToDTO(model));
