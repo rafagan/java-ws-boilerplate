@@ -16,9 +16,12 @@ public class ExampleController extends Controller {
     @Inject
     private ExampleAdapter dbAdapter;
 
+    @Inject
+    private ExampleSerializer serializer;
+
     public Response get(int interval, int page, int size) {
         List<ExampleModel> models = dbAdapter.filterByInterval(interval, page, size);
-        List<ExampleDTO> data = ExampleSerializer.fromModelListToDTOList(models);
+        List<ExampleDTO> data = serializer.fromModelListToDTOList(models);
         return response.ok(data);
     }
 }

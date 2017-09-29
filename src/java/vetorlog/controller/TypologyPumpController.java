@@ -16,9 +16,12 @@ public class TypologyPumpController extends Controller {
     @Inject
     private TypologyPumpAdapter dbAdapter;
 
+    @Inject
+    private TypologyPumpSerializer serializer;
+
     public Response get(int groupSiteId, int page, int size) {
         List<TypologyPumpModel> models = dbAdapter.filterByGroupSiteId(groupSiteId, page, size);
-        List<TypologyPumpDTO> data = TypologyPumpSerializer.fromModelListToDTOList(models);
+        List<TypologyPumpDTO> data = serializer.fromModelListToDTOList(models);
         return response.ok(data);
     }
 }

@@ -9,6 +9,7 @@ import vetorlog.dto.TokenDTO;
 import vetorlog.dto.UserDTO;
 import vetorlog.model.UserModel;
 import vetorlog.model.adapters.UserAdapter;
+import vetorlog.serializer.TypologyPumpSerializer;
 import vetorlog.serializer.UserSerializer;
 import vetorlog.util.PasswordUtils;
 import vetorlog.util.TokenUtils;
@@ -20,6 +21,9 @@ import javax.ws.rs.core.Response;
 public class UserController extends Controller {
     @Inject
     private UserAdapter dbAdapter;
+
+    @Inject
+    private UserSerializer serializer;
 
     @SneakyThrows
     public Response login(LoginDTO dto) {
@@ -47,7 +51,7 @@ public class UserController extends Controller {
         model.setPassword(passwordHash);
         dbAdapter.insert(model);
 
-        UserDTO data = UserSerializer.fromModelToDTO(model);
+        UserDTO data = serializer.fromModelToDTO(model);
         return response.ok(data);
     }
 }
