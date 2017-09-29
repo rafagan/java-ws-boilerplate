@@ -25,7 +25,7 @@ class SentryTest {
     @Test
     void testLog4j2WithSentry() {
         log.debug("Teste");
-        log.fatal("Teste");
+        log.fatal("Saporra sem borda");
     }
 
     void theException() {

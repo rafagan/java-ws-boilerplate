@@ -1,6 +1,8 @@
 package vetorlog.api;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import vetorlog.conf.Constant;
@@ -8,13 +10,12 @@ import vetorlog.controller.ExampleController;
 import vetorlog.util.type.RoleType;
 
 import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 @Api(
@@ -31,15 +32,17 @@ public class ExampleAPI {
     @ApiOperation(value = "Requisição GET com query params e retorno de JSON", produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
     public Response getWithQueryParams(
-            @QueryParam("interval") int interval,
+            @QueryParam("interval")
+                    int interval,
             @QueryParam("page")
                     int page,
             @QueryParam("size")
             @Size(min = 1)
             @DefaultValue(Constant.DEFAULT_PAGE_SIZE)
-                    int size)
-    {
+                    int size
+    ) {
         // Utilizar para testar a captura de erros do Sentry
 //        if(true)
 //            throw new NullPointerException("adasknasdjnasdjk");

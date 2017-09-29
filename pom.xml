@@ -17,6 +17,7 @@
         <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
         <maven-surefile-plugin.version>2.20</maven-surefile-plugin.version>
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
+        <tomcat-deploy-plugin.version>2.2</tomcat-deploy-plugin.version>
 
         <!-- Java EE -->
         <javax.servlet.version>4.0.0</javax.servlet.version>
@@ -104,15 +105,15 @@
 
             <!-- Configurações de deploy: Dizem que funciona pra Tomcat 8 também a versão do Tomcat 7.
              Os plugins para a 8 estão alpha ainda -->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.tomcat.maven</groupId>-->
-                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
-                <!--<version>2.2</version>-->
-                <!--<configuration>-->
-                    <!--<url>http://localhost:8080/manager/text</url>-->
-                    <!--<server>TomcatServer</server>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat-deploy-plugin.version}</version>
+                <configuration>
+                    <url>http://localhost:8080/manager/text</url>
+                    <server>TomcatServer</server>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

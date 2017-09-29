@@ -42,7 +42,6 @@ public class AuthorizationInterceptor implements SecurityContext {
             allowed = user.getRole().isAdmin();
 
         return allowed;
-
     }
 
     @Override
