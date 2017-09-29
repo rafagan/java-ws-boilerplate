@@ -31,6 +31,7 @@ public class ExpectedPerformanceController extends Controller {
 
     public Response post(ExpectedPerformanceDTO dto) {
         ExpectedPerformanceModel model = serializer.fromDTOToModel(dto);
+        model.setUser(user());
         dbAdapter.insert(model);
         return response.ok();
     }
@@ -38,6 +39,7 @@ public class ExpectedPerformanceController extends Controller {
     public Response put(long id, ExpectedPerformanceDTO dto) {
         ExpectedPerformanceModel model = serializer.fromDTOToModel(dto);
         model.setId(id);
+        model.setUser(user());
         dbAdapter.update(model);
         return response.ok();
     }

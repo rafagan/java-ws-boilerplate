@@ -24,8 +24,8 @@ public class ExpectedPerformanceSerializer {
         dto.setMinimum(model.getMinimum());
         dto.setSatisfactory(model.getSatisfactory());
         dto.setUnsatisfactory(model.getUnsatisfactory());
-        dto.setUserId(model.getUser().getId());
         dto.setWithoutCredibility(model.getWithoutCredibility());
+        dto.setUserName(model.getUser().getName());
 
         return dto;
     }
@@ -44,9 +44,6 @@ public class ExpectedPerformanceSerializer {
             TypologyPumpModel t = dbManager.find(TypologyPumpModel.class, dto.getTypologyPumpId());
             model.setTypologyPump(t);
         }
-
-        UserModel user = dbManager.find(UserModel.class, dto.getUserId());
-        model.setUser(user);
 
         return model;
     }

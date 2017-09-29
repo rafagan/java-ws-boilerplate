@@ -23,8 +23,8 @@ public class ExpectedPerformanceDTO {
     @JsonProperty("created_at")
     private Date createdAt;
 
-    @JsonProperty(value = "user_id", required = true)
-    private String userId;
+    @JsonProperty(value = "user_name", required = true, access = JsonProperty.Access.READ_ONLY)
+    private String userName;
 
     @JsonProperty(value = "typology_pump_id", access = JsonProperty.Access.WRITE_ONLY)
     private String typologyPumpId;
