@@ -8,7 +8,7 @@ import vetorlog.dto.LoginDTO;
 import vetorlog.dto.TokenDTO;
 import vetorlog.dto.UserDTO;
 import vetorlog.model.UserModel;
-import vetorlog.model.queries.UserQuery;
+import vetorlog.model.adapters.UserAdapter;
 import vetorlog.serializer.UserSerializer;
 import vetorlog.util.PasswordUtils;
 import vetorlog.util.TokenUtils;
@@ -19,13 +19,13 @@ import javax.ws.rs.core.Response;
 @Service
 public class UserController extends Controller {
     @Inject
-    private UserQuery userQueries;
+    private UserAdapter dbAdapter;
 
     @SneakyThrows
     public Response login(LoginDTO dto) {
         Response unauthorized = response.unauthorized(i18n().get("invalid_email_password"), true);
 
-        UserModel user = userQueries.findUserByEmail(dto.getEmail());
+        UserModel user = dbAdapter.findUserByEmail(dto.getEmail());
         if (user == null)
             return unauthorized;
 
@@ -45,7 +45,7 @@ public class UserController extends Controller {
         model.setName(createUserDTO.getName());
         model.setEmail(createUserDTO.getEmail());
         model.setPassword(passwordHash);
-        userQueries.insert(model);
+        dbAdapter.insert(model);
 
         UserDTO data = UserSerializer.fromModelToDTO(model);
         return response.ok(data);

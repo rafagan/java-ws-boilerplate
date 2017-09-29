@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import vetorlog.model.prototype.ModelLong;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,4 +24,7 @@ public class TypologyPumpModel extends ModelLong {
 
     @ManyToMany(mappedBy = "typologyPumps")
     private Set<GroupSitesModel> groupSites;
+
+    @OneToMany(mappedBy = "typologyPump")
+    private Set<ExpectedPerformanceModel> expectedPerformances = new HashSet<>();
 }

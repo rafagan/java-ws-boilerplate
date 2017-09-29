@@ -4,9 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import vetorlog.model.prototype.ModelLong;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="desempenho_esperado")
@@ -33,4 +31,8 @@ public class ExpectedPerformanceModel extends ModelLong {
 
     @Column(name = "user_id")
     private String userId;
+
+    @ManyToOne
+    @JoinColumn(name="tipologia_bomba_id")
+    private TypologyPumpModel typologyPump;
 }

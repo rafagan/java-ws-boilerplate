@@ -198,6 +198,23 @@ public class DatabaseManager {
     }
 
     /**
+     * Lista todos os objetos do mesmo tipo cadastrados no banco de dados, com paginação
+     * @param objectClass Classe JPA da tabela
+     * @param page Página desejada, calculada de acordo com o tamanho
+     * @param size Tamanho da página
+     * @return Lista dos objetos cadastrados
+     */
+    @SuppressWarnings({"unchecked"})
+    public <T extends IModel> List<T> all(Class<T> objectClass, int page, int size) {
+        Query query = this.getEntityManager().createQuery(
+                "SELECT t FROM " + objectClass.getName() + " AS t"
+        );
+        query.setMaxResults(size);
+        query.setFirstResult(size * page);
+        return query.getResultList();
+    }
+
+    /**
      * Realiza busca de um objeto no banco de dados pelo ID (UUID ou Inteiro)
      * @param objectClass Classe JPA da tabela
      * @param id O id do object a ser buscado

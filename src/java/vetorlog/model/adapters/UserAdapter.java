@@ -1,4 +1,4 @@
-package vetorlog.model.queries;
+package vetorlog.model.adapters;
 
 import lombok.NoArgsConstructor;
 import org.jvnet.hk2.annotations.Service;
@@ -10,9 +10,9 @@ import javax.persistence.TypedQuery;
 
 @NoArgsConstructor
 @Service
-public class UserQuery extends DatabaseManager {
+public class UserAdapter extends DatabaseManager {
     // É necessário quando não há ecossistema de DI (ex: JUnit)
-    public UserQuery(IEntityManagerWrapper emw) {
+    public UserAdapter(IEntityManagerWrapper emw) {
         this.emw = emw;
     }
 

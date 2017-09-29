@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Test;
 import vetorlog.api.util.UserTokenUtils;
 import vetorlog.model.RoleModel;
 import vetorlog.model.UserModel;
-import vetorlog.model.queries.UserQuery;
+import vetorlog.model.adapters.UserAdapter;
 import vetorlog.model.util.relational.WrapperDefault;
 import vetorlog.util.PasswordUtils;
-import vetorlog.util.TokenUtils;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -35,7 +34,7 @@ class UserTest extends ResourceLocalTestConfig {
             model.setPassword(PasswordUtils.generateHashPassword(domain, null));
             model.setRole(role);
 
-            if(new UserQuery(new WrapperDefault()).findUserByEmail(model.getEmail()) == null)
+            if(new UserAdapter(new WrapperDefault()).findUserByEmail(model.getEmail()) == null)
                 dbManager.insert(model);
         }
     }
