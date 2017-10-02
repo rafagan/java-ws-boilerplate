@@ -32,7 +32,8 @@ public class GroupSiteAPI {
             produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
+//    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
+    @PermitAll
     public Response getGroupSites(
             @QueryParam("page")
                     int page,

@@ -46,6 +46,7 @@
         <swagger.version>1.5.16</swagger.version>
         <jsonwebtoken.version>0.7.0</jsonwebtoken.version>
         <reflections.version>0.9.11</reflections.version>
+        <tomcat.version>8.5.23</tomcat.version>
     </properties>
 
     <build>
@@ -317,5 +318,13 @@
             <artifactId>commons-beanutils</artifactId>
             <version>${apache.beanutils.version}</version>
         </dependency>
+
+        <!-- Tomcat 8 -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+
     </dependencies>
 </project>

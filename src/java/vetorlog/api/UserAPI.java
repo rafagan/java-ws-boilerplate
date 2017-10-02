@@ -37,7 +37,7 @@ public class UserAPI {
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
-    public Response login(@ApiParam(name = "body") LoginDTO loginDTO) {
+    public Response login(LoginDTO loginDTO) {
         return controller.login(loginDTO);
     }
 

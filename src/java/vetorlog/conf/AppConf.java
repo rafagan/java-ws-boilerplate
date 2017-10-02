@@ -1,5 +1,10 @@
 package vetorlog.conf;
 
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import io.sentry.Sentry;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.config.SwaggerContextService;
@@ -15,6 +20,9 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
 
 @Log4j2
 @ApplicationPath("api")
@@ -56,11 +64,16 @@ public class AppConf extends ResourceConfig {
         new SwaggerContextService().updateSwagger(swagger);
     }
 
+    private void confJackson() {
+        register(JacksonConf.class);
+    }
+
     public AppConf() {
         confJersey2();
         confDependencyInjection();
         confSentry();
         confSwagger();
+        confJackson();
     }
 }
 

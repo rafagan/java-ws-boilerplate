@@ -23,7 +23,7 @@ public class SwaggerAPI {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Response indexPage() throws IOException {
-        currentResponse.sendRedirect("/swagger/dist/");
+        currentResponse.sendRedirect("/swagger/");
         return response.ok();
     }
 }
