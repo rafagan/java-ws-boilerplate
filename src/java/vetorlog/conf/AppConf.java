@@ -1,16 +1,10 @@
 package vetorlog.conf;
 
-import com.fasterxml.jackson.databind.DeserializationConfig;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationConfig;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import io.sentry.Sentry;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.models.Swagger;
 import io.swagger.models.auth.ApiKeyAuthDefinition;
-import io.swagger.models.auth.BasicAuthDefinition;
 import io.swagger.models.auth.In;
 import lombok.extern.log4j.Log4j2;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -20,9 +14,6 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.MediaType;
 
 @Log4j2
 @ApplicationPath("api")

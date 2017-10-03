@@ -33,6 +33,8 @@ o banco de dados utilizado. Talvez a IDE não reconheça, então é bom também 
 ambiente na IDE. Aqui, também ficarão os comandos de criação de arquivos de sistema da aplicação.
 
 
+### Organização do projeto ###
+
 Boleiplate
 
 Swagger: Descrição de como setar o swagger.json

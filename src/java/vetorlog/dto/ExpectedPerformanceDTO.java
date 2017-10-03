@@ -26,6 +26,6 @@ public class ExpectedPerformanceDTO {
     @JsonProperty(value = "user_name", required = true, access = JsonProperty.Access.READ_ONLY)
     private String userName;
 
-    @JsonProperty(value = "typology_pump_id", access = JsonProperty.Access.WRITE_ONLY)
-    private String typologyPumpId;
+//    @JsonProperty(value = "typology_pump_id", access = JsonProperty.Access.WRITE_ONLY)
+    private Long typologyPumpId;
 }

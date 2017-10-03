@@ -466,7 +466,7 @@
         </init-param>
         <init-param>
             <param-name>cors.support.credentials</param-name>
-            <param-value>false</param-value>
+            <param-value>true</param-value>
         </init-param>
         <init-param>
             <param-name>cors.preflight.maxage</param-name>
@@ -477,7 +477,6 @@
         <filter-name>CorsFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
 <!--
     <filter>

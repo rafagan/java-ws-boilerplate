@@ -5,6 +5,7 @@ import org.jvnet.hk2.annotations.Service;
 import vetorlog.manager.DatabaseManager;
 import vetorlog.model.ExpectedPerformanceModel;
 
+import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
