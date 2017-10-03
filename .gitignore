@@ -3,3 +3,4 @@
 target/
 
 src/webapp/
+!src/webapp/errors

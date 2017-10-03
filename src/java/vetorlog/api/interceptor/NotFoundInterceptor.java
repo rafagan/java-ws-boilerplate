@@ -1,0 +1,30 @@
+package vetorlog.api.interceptor;
+
+import vetorlog.api.util.ResponseFactory;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+import java.io.IOException;
+
+@Provider
+public class NotFoundInterceptor implements ExceptionMapper<NotFoundException> {
+    @Context
+    private HttpServletResponse currentResponse;
+
+    @Inject
+    private ResponseFactory response;
+
+    public Response toResponse(NotFoundException exception) {
+        try {
+            currentResponse.sendRedirect("/errors/404.html");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response.ok();
+    }
+}

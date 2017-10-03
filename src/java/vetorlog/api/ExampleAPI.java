@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
+import vetorlog.api.util.ResponseFactory;
 import vetorlog.conf.Constant;
 import vetorlog.controller.ExampleController;
 import vetorlog.util.type.RoleType;
@@ -28,6 +29,9 @@ import javax.ws.rs.core.Response;
 public class ExampleAPI {
     @Inject
     private ExampleController controller;
+
+    @Inject
+    private ResponseFactory responseFactory;
 
     @ApiOperation(value = "Requisição GET, com PermitAll", produces = MediaType.APPLICATION_JSON)
     @GET

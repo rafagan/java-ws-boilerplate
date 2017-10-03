@@ -3,7 +3,14 @@
     RewriteCond %{REQUEST_FILENAME} -s [OR]
     RewriteCond %{REQUEST_FILENAME} -l [OR]
     RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^.*$ - [NC,L]
 
+    RewriteRule ^.*$ - [NC,L]
     RewriteRule ^(.*) /index.html [NC,L]
+</ifModule>
+
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS,HEAD"
+    Header always set Access-Control-Max-Age "1000"
+    Header always set Access-Control-Allow-Headers "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers"
 </ifModule>
