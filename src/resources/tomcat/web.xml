@@ -111,6 +111,10 @@
             <param-name>listings</param-name>
             <param-value>false</param-value>
         </init-param>
+        <init-param>
+            <param-name>readonly</param-name>
+            <param-value>false</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
@@ -454,23 +458,7 @@
         </init-param>
         <init-param>
             <param-name>cors.allowed.methods</param-name>
-            <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.allowed.headers</param-name>
-            <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.exposed.headers</param-name>
-            <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.support.credentials</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.preflight.maxage</param-name>
-            <param-value>10</param-value>
+            <param-value>GET,POST,HEAD,OPTIONS,PUT,DELETE</param-value>
         </init-param>
     </filter>
     <filter-mapping>

@@ -39,4 +39,10 @@ public class ExpectedPerformanceController extends Controller {
         dbAdapter.update(model);
         return response.ok();
     }
+
+    public Response delete(long id) {
+        ExpectedPerformanceModel model = dbAdapter.find(ExpectedPerformanceModel.class, id);
+        dbAdapter.delete(model);
+        return response.ok();
+    }
 }

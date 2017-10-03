@@ -26,8 +26,8 @@ cp -v ${PROJECT}/resources/tomcat/context.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/resources/tomcat/server.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/resources/tomcat/web.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/resources/maven/settings.xml ${MAVEN}/;
-cp -v ${PROJECT}/resources/apache/httpd.conf ${APACHE}/;
-cp -v ${PROJECT}/resources/apache/httpd-vhosts.conf ${APACHE}/extra/;
+# cp -v ${PROJECT}/resources/apache/httpd.conf ${APACHE}/;
+# cp -v ${PROJECT}/resources/apache/httpd-vhosts.conf ${APACHE}/extra/;
 
 # Dependências provided
 cp -v -r ${PROJECT}/tomcat-libs/* ${TOMCAT}/lib/;
@@ -38,10 +38,16 @@ alias tomcat_stop='brew services stop tomcat';
 alias tomcat_restart='brew services restart tomcat';
 alias mysql_start='mysql.server start';
 alias mysql_stop='mysql.server stop';
-alias apache_start='sudo httpd -k start; sudo apachectl start;';
-alias apache_stop='sudo apachectl stop; sudo httpd -k stop;';
-alias apache_restart='sudo apachectl restart';
 alias apache_log='tail -n 1000 /private/var/log/apache2/error_log';
 alias tomcat_deploy='mvn tomcat7:deploy';
 alias tomcat_undeploy='mvn tomcat7:undeploy';
 alias tomcat_redeploy='mvn tomcat7:redeploy';
+
+apache_start() {
+    sudo httpd -k start;
+    sudo apachectl start;
+}
+apache_stop() {
+    sudo httpd -k stop;
+    sudo apachectl stop;
+}

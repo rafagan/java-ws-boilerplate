@@ -18,6 +18,7 @@ public class ExpectedPerformanceSerializer {
 
     public ExpectedPerformanceDTO fromModelToDTO(ExpectedPerformanceModel model) {
         ExpectedPerformanceDTO dto = new ExpectedPerformanceDTO();
+        dto.setId(model.getId());
         dto.setCreatedAt(model.getCreatedAt());
         dto.setMaximum(model.getMaximum());
         dto.setMedian(model.getMedian());

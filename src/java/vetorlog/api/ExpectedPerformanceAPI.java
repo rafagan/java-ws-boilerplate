@@ -73,4 +73,18 @@ public class ExpectedPerformanceAPI {
     ) {
         return controller.put(id, dto);
     }
+
+    @Path("{id}")
+    @ApiOperation(
+            value = "Deleção de desempenho esperado",
+            produces = MediaType.APPLICATION_JSON
+    )
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({RoleType.ADMIN, RoleType.USER})
+    public Response deleteExpectedPerformance(
+            @PathParam("id") long id
+    ) {
+        return controller.delete(id);
+    }
 }

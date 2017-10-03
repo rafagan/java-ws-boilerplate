@@ -29,7 +29,7 @@ public class ExampleAPI {
     @Inject
     private ExampleController controller;
 
-    @ApiOperation(value = "Requisição GET com query params e retorno de JSON", produces = MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Requisição GET, com PermitAll", produces = MediaType.APPLICATION_JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
@@ -51,28 +51,28 @@ public class ExampleAPI {
     }
 
     @ApiOperation(
-            value = "Requisição POST, com login e geração de token com dados do header",
+            value = "Requisição POST",
             produces = MediaType.TEXT_PLAIN)
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     public String postToLogin() {
-        String result = "Hello World POST";
+        String result = "Example POST";
         log.log(Level.INFO, result);
         return result;
     }
 
-    @ApiOperation(value = "Requisição PUT, com atualização de dados via JSON", produces = MediaType.TEXT_PLAIN)
+    @ApiOperation(value = "Requisição PUT, com RoleType ADMIN e USER", produces = MediaType.TEXT_PLAIN)
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
     @RolesAllowed({RoleType.ADMIN, RoleType.USER})
     public String putWithJson() {
-        String result = "Hello World PUT";
+        String result = "Example PUT";
         log.log(Level.INFO, result);
         return result;
     }
 
     @RolesAllowed({RoleType.USER})
-    @ApiOperation(value = "Requisição DELETE, com deleção de arquivo por Path Param", produces = MediaType.TEXT_PLAIN)
+    @ApiOperation(value = "Requisição DELETE, com RoleType USER", produces = MediaType.TEXT_PLAIN)
     @DELETE
     public String deleteWithPathParam() {
         String result = "Hello World DELETE";
@@ -81,7 +81,7 @@ public class ExampleAPI {
     }
 
     @DenyAll
-    @ApiOperation(value = "Requisição PATCH, com atualização de alguns campos via JSON, com validação", produces = MediaType.TEXT_PLAIN)
+    @ApiOperation(value = "Requisição PATCH, com DenyAll", produces = MediaType.TEXT_PLAIN)
     @PATCH
     @Produces(MediaType.TEXT_PLAIN)
     public String patchSomeFields() {
