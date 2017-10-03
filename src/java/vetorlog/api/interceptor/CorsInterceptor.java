@@ -31,8 +31,3 @@ public class CorsInterceptor implements ContainerResponseFilter {
         headers.add(ACCESS_CONTROL_MAX_AGE, ACCESS_CONTROL_MAX_AGE_IN_SECONDS);
     }
 }
-
-//Header add "Access-Control-Allow-Origin" "*"
-//Header add "Access-Control-Allow-Methods" "GET,POST,PUT,DELETE,OPTIONS,HEAD"
-//Header add "Access-Control-Max-Age" "1000"
-//Header add "Access-Control-Allow-Headers" "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers"
