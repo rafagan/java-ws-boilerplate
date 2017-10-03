@@ -14,6 +14,7 @@ export SENTRY_DSN='https://1b55d22eb65b4ec9959eaffe8e63dc11:ec0b6b50c51547fdaac1
 
 # Caminhos
 PROJECT='/Users/rafagan/Desktop/Dropbox/Guizion_Dev/Vetorlog/new_econometer/src';
+WEBDIST='/var/www/econometer.com/public_html'
 TOMCAT='/usr/local/Cellar/tomcat/8.5.20/libexec';
 MAVEN='/usr/local/Cellar/maven/3.5.0/libexec/conf';
 APACHE='/private/etc/apache2';
@@ -26,8 +27,9 @@ cp -v ${PROJECT}/resources/tomcat/context.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/resources/tomcat/server.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/resources/tomcat/web.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/resources/maven/settings.xml ${MAVEN}/;
-# cp -v ${PROJECT}/resources/apache/httpd.conf ${APACHE}/;
-# cp -v ${PROJECT}/resources/apache/httpd-vhosts.conf ${APACHE}/extra/;
+cp -v ${PROJECT}/resources/apache/httpd.conf ${APACHE}/;
+cp -v ${PROJECT}/resources/apache/httpd-vhosts.conf ${APACHE}/extra/;
+cp -v ${PROJECT}/resources/apache/.htaccess ${WEBDIST}/;
 
 # Dependências provided
 cp -v -r ${PROJECT}/tomcat-libs/* ${TOMCAT}/lib/;
@@ -50,4 +52,8 @@ apache_start() {
 apache_stop() {
     sudo httpd -k stop;
     sudo apachectl stop;
+}
+apache_restart() {
+    apache_stop;
+    apache_start;
 }
