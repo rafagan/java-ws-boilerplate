@@ -2,5 +2,5 @@
 *.iml
 target/
 
-src/webapp/
-!src/webapp/errors
+src/webapp/WEB-INF
+src/webapp/META-INF
