@@ -14,9 +14,9 @@ export SENTRY_DSN='https://1b55d22eb65b4ec9959eaffe8e63dc11:ec0b6b50c51547fdaac1
 
 # Caminhos
 PROJECT='/Users/rafagan/Desktop/Dropbox/Guizion_Dev/Vetorlog/new_econometer/src';
-TOMCAT='/usr/local/Cellar/tomcat/8.5.20/libexec'
+TOMCAT='/usr/local/Cellar/tomcat/8.5.20/libexec';
 MAVEN='/usr/local/Cellar/maven/3.5.0/libexec/conf';
-APACHE='/private/etc/apache2'
+APACHE='/private/etc/apache2';
 
 # Arquivos de configuração
 cp -v ${PROJECT}/resources/tomcat/tomcat-users.xml ${TOMCAT}/conf/;
@@ -38,8 +38,8 @@ alias tomcat_stop='brew services stop tomcat';
 alias tomcat_restart='brew services restart tomcat';
 alias mysql_start='mysql.server start';
 alias mysql_stop='mysql.server stop';
-alias apache_start='sudo apachectl start';
-alias apache_stop='sudo apachectl stop';
+alias apache_start='sudo httpd -k start; sudo apachectl start;';
+alias apache_stop='sudo apachectl stop; sudo httpd -k stop;';
 alias apache_restart='sudo apachectl restart';
 alias apache_log='tail -n 1000 /private/var/log/apache2/error_log';
 alias tomcat_deploy='mvn tomcat7:deploy';
