@@ -20,16 +20,16 @@ MAVEN='/usr/local/Cellar/maven/3.5.0/libexec/conf';
 APACHE='/private/etc/apache2';
 
 # Arquivos de configuração
-cp -v ${PROJECT}/resources/tomcat/tomcat-users.xml ${TOMCAT}/conf/;
-cp -v ${PROJECT}/resources/tomcat/manager-context.xml ${TOMCAT}/webapps/manager/META-INF/context.xml;
-cp -v ${PROJECT}/resources/tomcat/manager-context.xml ${TOMCAT}/webapps/host-manager/META-INF/context.xml;
-cp -v ${PROJECT}/resources/tomcat/context.xml ${TOMCAT}/conf/;
-cp -v ${PROJECT}/resources/tomcat/server.xml ${TOMCAT}/conf/;
-cp -v ${PROJECT}/resources/tomcat/web.xml ${TOMCAT}/conf/;
-cp -v ${PROJECT}/resources/maven/settings.xml ${MAVEN}/;
-cp -v ${PROJECT}/resources/apache/httpd.conf ${APACHE}/;
-cp -v ${PROJECT}/resources/apache/httpd-vhosts.conf ${APACHE}/extra/;
-cp -v ${PROJECT}/resources/apache/.htaccess ${WEBDIST}/;
+cp -v ${PROJECT}/conf/tomcat/tomcat-users.xml ${TOMCAT}/conf/;
+cp -v ${PROJECT}/conf/tomcat/manager-context.xml ${TOMCAT}/webapps/manager/META-INF/context.xml;
+cp -v ${PROJECT}/conf/tomcat/manager-context.xml ${TOMCAT}/webapps/host-manager/META-INF/context.xml;
+cp -v ${PROJECT}/conf/tomcat/context.xml ${TOMCAT}/conf/;
+cp -v ${PROJECT}/conf/tomcat/server.xml ${TOMCAT}/conf/;
+cp -v ${PROJECT}/conf/tomcat/web.xml ${TOMCAT}/conf/;
+cp -v ${PROJECT}/conf/maven/settings.xml ${MAVEN}/;
+cp -v ${PROJECT}/conf/apache/httpd.conf ${APACHE}/;
+cp -v ${PROJECT}/conf/apache/httpd-vhosts.conf ${APACHE}/extra/;
+cp -v ${PROJECT}/conf/apache/.htaccess ${WEBDIST}/;
 
 # Dependências provided
 cp -v -r ${PROJECT}/tomcat-libs/* ${TOMCAT}/lib/;
