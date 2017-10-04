@@ -2,6 +2,7 @@ package vetorlog.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import vetorlog.model.prototype.ModelLong;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Table(name="groupsites")
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = {"typologyPumps"})
+@ToString(exclude = {"typologyPumps"})
 public class GroupSitesModel extends ModelLong {
     @Column(name = "nome")
     private String name;

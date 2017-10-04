@@ -21,13 +21,9 @@ public class CorsInterceptor implements ContainerResponseFilter {
     public void filter(ContainerRequestContext containerRequest,
                        ContainerResponseContext containerResponse) throws IOException
     {
-        final int ACCESS_CONTROL_MAX_AGE_IN_SECONDS = 12 * 60 * 60;
         MultivaluedMap<String, Object> headers = containerResponse.getHeaders();
-
         headers.add(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
-        headers.add(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
-        headers.add(ACCESS_CONTROL_ALLOW_METHODS, "GET,POST,PUT,DELETE,OPTIONS,HEAD");
-        headers.add(ACCESS_CONTROL_MAX_AGE, ACCESS_CONTROL_MAX_AGE_IN_SECONDS);
+        headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "accept, content-type, accept-language, authorization");
+        headers.add(ACCESS_CONTROL_ALLOW_METHODS, "GET, PUT, POST, DELETE, PATCH, OPTIONS, HEAD");
     }
 }

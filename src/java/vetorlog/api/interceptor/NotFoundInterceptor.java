@@ -3,6 +3,7 @@ package vetorlog.api.interceptor;
 import vetorlog.api.util.ResponseFactory;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Context;
@@ -13,6 +14,9 @@ import java.io.IOException;
 
 @Provider
 public class NotFoundInterceptor implements ExceptionMapper<NotFoundException> {
+    @Context
+    private HttpServletRequest request;
+
     @Context
     private HttpServletResponse currentResponse;
 

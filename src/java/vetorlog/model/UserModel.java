@@ -10,6 +10,7 @@ import java.security.Principal;
 @Table(name="User")
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = {"role"})
+@ToString(exclude = {"role"})
 public class UserModel extends Model implements Principal {
     @Column
     private String name;

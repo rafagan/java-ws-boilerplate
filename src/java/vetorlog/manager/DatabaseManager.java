@@ -170,8 +170,9 @@ public class DatabaseManager {
             if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().begin();
 
-            T a = this.getEntityManager().merge(object);
-            this.getEntityManager().remove(a);
+//            T a = this.getEntityManager().merge(object);
+            this.getEntityManager().flush();
+            this.getEntityManager().remove(object);
 
             if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
                 this.getEntityManager().getTransaction().commit();

@@ -26,11 +26,10 @@ cp -v ${PROJECT}/conf/tomcat/manager-context.xml ${TOMCAT}/webapps/host-manager/
 cp -v ${PROJECT}/conf/tomcat/context.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/conf/tomcat/server.xml ${TOMCAT}/conf/;
 cp -v ${PROJECT}/conf/tomcat/web.xml ${TOMCAT}/conf/;
-cp -rv ${PROJECT}/conf/tomcat/404/ ${TOMCAT}/conf/404/;
 cp -v ${PROJECT}/conf/maven/settings.xml ${MAVEN}/;
 cp -v ${PROJECT}/conf/apache/httpd.conf ${APACHE}/;
 cp -v ${PROJECT}/conf/apache/httpd-vhosts.conf ${APACHE}/extra/;
-cp -v ${PROJECT}/conf/apache/.htaccess ${WEBDIST}/;
+cp -rv ${PROJECT}/conf/angular/ ${WEBDIST}/;
 
 # Dependências provided
 cp -v -r ${PROJECT}/tomcat-libs/* ${TOMCAT}/lib/;

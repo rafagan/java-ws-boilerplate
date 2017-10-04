@@ -2,6 +2,7 @@ package vetorlog.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import vetorlog.model.prototype.ModelLong;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name="desempenho_esperado")
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = {"user", "typologyPump"})
+@ToString(exclude = {"user", "typologyPump"})
 public class ExpectedPerformanceModel extends ModelLong {
     @Column(name = "minimo")
     private double minimum;
