@@ -170,8 +170,6 @@ public class DatabaseManager {
             if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().begin();
 
-//            T a = this.getEntityManager().merge(object);
-            this.getEntityManager().flush();
             this.getEntityManager().remove(object);
 
             if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
@@ -181,6 +179,35 @@ public class DatabaseManager {
         } catch(Exception e) {
             if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
                 this.getEntityManager().getTransaction().rollback();
+
+            throw e;
+        }
+    }
+
+    /**
+     * Deleta um objeto no banco de dados
+     * @param objectClass Classe JPA da tabela
+     * @param id  id do objeto a ser deletado
+     */
+    @Transactional
+    public <T, U> void delete(Class<T> objectClass, U id) {
+        try {
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().begin();
+
+            Query query = this.getEntityManager().createQuery(
+                    "DELETE FROM " + objectClass.getSimpleName() + " AS m WHERE m.id = :id");
+            query.setParameter("id", id);
+            query.executeUpdate();
+
+            if(Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL) {
+                this.getEntityManager().getTransaction().commit();
+                this.getEntityManager().close();
+            }
+        } catch(Exception e) {
+            if (Constant.DATABASE_CONTEXT == PersistenceContextType.RESOURCE_LOCAL)
+                this.getEntityManager().getTransaction().rollback();
+
             throw e;
         }
     }
