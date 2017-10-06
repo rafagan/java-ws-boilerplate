@@ -32,8 +32,10 @@ public class ExpectedPerformanceSerializer {
     }
 
     public ExpectedPerformanceModel fromDTOToModel(ExpectedPerformanceDTO dto) {
-        ExpectedPerformanceModel model = new ExpectedPerformanceModel();
-        model.setCreatedAt(dto.getCreatedAt());
+        ExpectedPerformanceModel model = dbManager.find(ExpectedPerformanceModel.class, dto.getId());
+        if(model == null)
+            model = new ExpectedPerformanceModel();
+
         model.setMaximum(dto.getMaximum());
         model.setMedian(dto.getMedian());
         model.setMinimum(dto.getMinimum());

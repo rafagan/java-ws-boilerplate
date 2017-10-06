@@ -9,8 +9,8 @@ export EMETER_APP_LOCALE='pt_BR'; # or en_US
 export SENTRY_DSN='https://1b55d22eb65b4ec9959eaffe8e63dc11:ec0b6b50c51547fdaac1ddaac12b3f68@sentry.io/215551';
 
 # Arquivo de log do sistema (rodar apenas uma vez)
-# sudo touch /var/log/emeter_log.txt;
-# sudo chmod 777 /var/log/emeter_log.txt;
+#sudo touch /var/log/emeter_log.txt;
+#sudo chmod 777 /var/log/emeter_log.txt;
 
 # Caminhos
 PROJECT='/Users/rafagan/Desktop/Dropbox/Guizion_Dev/Vetorlog/new_econometer/src';

@@ -33,8 +33,8 @@ public class ExpectedPerformanceController extends Controller {
     }
 
     public Response put(long id, ExpectedPerformanceDTO dto) {
+        dto.setId(id);
         ExpectedPerformanceModel model = serializer.fromDTOToModel(dto);
-        model.setId(id);
         model.setUser(user());
         dbAdapter.update(model);
         return response.ok();
