@@ -1,7 +1,7 @@
 package vetorlog;
 
 import org.junit.jupiter.api.Test;
-import vetorlog.conf.ResourceLocalTestConfig;
+import vetorlog.prototype.ResourceLocalTestConfig;
 import vetorlog.api.util.UserTokenUtils;
 import vetorlog.model.UserModel;
 

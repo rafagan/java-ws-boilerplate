@@ -38,10 +38,10 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.show_sql" value="true" />
 
-            <property name="javax.persistence.schema-generation.database.action" value="update" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <!--<property name="javax.persistence.schema-generation.database.action" value="validate"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="validate" />-->
+            <!--<property name="javax.persistence.schema-generation.database.action" value="update" />-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="javax.persistence.schema-generation.database.action" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
     </persistence-unit>
 
@@ -57,10 +57,10 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.show_sql" value="true" />
 
-            <property name="javax.persistence.schema-generation.database.action" value="update" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <!--<property name="javax.persistence.schema-generation.database.action" value="validate"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="validate" />-->
+            <!--<property name="javax.persistence.schema-generation.database.action" value="update" />-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="javax.persistence.schema-generation.database.action" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
     </persistence-unit>
 
@@ -76,10 +76,10 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.show_sql" value="true" />
 
-            <property name="javax.persistence.schema-generation.database.action" value="update" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <!--<property name="javax.persistence.schema-generation.database.action" value="validate"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="validate" />-->
+            <!--<property name="javax.persistence.schema-generation.database.action" value="update" />-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="javax.persistence.schema-generation.database.action" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
     </persistence-unit>
 </persistence>

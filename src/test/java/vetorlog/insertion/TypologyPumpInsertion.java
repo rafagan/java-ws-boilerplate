@@ -2,7 +2,7 @@ package vetorlog.insertion;
 
 import lombok.val;
 import org.junit.jupiter.api.Test;
-import vetorlog.conf.ResourceLocalTestConfig;
+import vetorlog.prototype.ResourceLocalTestConfig;
 import vetorlog.model.GroupSitesModel;
 import vetorlog.model.TypologyPumpModel;
 

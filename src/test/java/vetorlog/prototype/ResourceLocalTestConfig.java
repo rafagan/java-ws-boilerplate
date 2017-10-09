@@ -1,4 +1,4 @@
-package vetorlog.conf;
+package vetorlog.prototype;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;

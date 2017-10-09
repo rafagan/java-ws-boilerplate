@@ -1,7 +1,7 @@
 package vetorlog.insertion;
 
 import org.junit.jupiter.api.Test;
-import vetorlog.conf.ResourceLocalTestConfig;
+import vetorlog.prototype.ResourceLocalTestConfig;
 import vetorlog.model.GroupSitesModel;
 
 public class GroupSitesInsertion extends ResourceLocalTestConfig {

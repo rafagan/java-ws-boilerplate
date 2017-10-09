@@ -5,7 +5,7 @@ import vetorlog.model.RoleModel;
 import vetorlog.model.UserModel;
 import vetorlog.model.adapter.UserAdapter;
 import vetorlog.model.util.relational.WrapperDefault;
-import vetorlog.conf.ResourceLocalTestConfig;
+import vetorlog.prototype.ResourceLocalTestConfig;
 import vetorlog.util.PasswordUtils;
 
 import java.util.HashMap;

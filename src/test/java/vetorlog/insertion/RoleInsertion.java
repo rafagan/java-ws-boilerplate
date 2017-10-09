@@ -3,7 +3,7 @@ package vetorlog.insertion;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import vetorlog.model.RoleModel;
-import vetorlog.conf.ResourceLocalTestConfig;
+import vetorlog.prototype.ResourceLocalTestConfig;
 import vetorlog.util.type.RoleType;
 
 import java.util.HashMap;
