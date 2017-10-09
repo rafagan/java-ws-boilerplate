@@ -8,7 +8,6 @@ import vetorlog.conf.Constant;
 import vetorlog.controller.TypologyPumpController;
 import vetorlog.util.type.RoleType;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
