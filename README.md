@@ -64,7 +64,7 @@ O script é dividido em 6 partes:
   - `WEBDIST`: Pasta configurada para receber o `dist` do Angular 4
   - `TOMCAT`: Diretório aonde o Tomcat foi instalado
   - `MAVEN`: Diretório aonde o Maven foi instalado
-  - `APACHE`: Diretório aonde o Aoache foi instalado
+  - `APACHE`: Diretório aonde o Apache foi instalado
 
 * Arquivos de configuração:
 
