@@ -9,6 +9,12 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Mapeamento objeto-relacional da tabela de papéis (Roles)
+ * Atualmente, o sistema suporta admin e user.
+ * Para que o usuário seja autorizado, deve-se validar se o método da requisição está mapeado com RolesAllowed e
+ * se o AuthorizationInterceptor está identificado o acesso como não restrito
+ */
 @Entity
 @Table(name="Role")
 @Data

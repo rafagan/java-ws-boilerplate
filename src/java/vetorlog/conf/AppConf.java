@@ -15,6 +15,11 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
 
+/**
+ * Esta é a primeira classe chamada no sistema. Sendo assim, as configurações aqui realizadas ocorrem sempre quando o
+ * servidor está subindo
+ * O Jersey 2 recebe apenas requests que iniciem com o path /api
+ */
 @Log4j2
 @ApplicationPath("api")
 public class AppConf extends ResourceConfig {

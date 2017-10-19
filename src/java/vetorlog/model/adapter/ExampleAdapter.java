@@ -8,6 +8,10 @@ import vetorlog.model.ExampleModel;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * Exemplo de pesquisa no banco de dados
+ * Cada adapter adiciona ao DatabaseManager as pesquisas relacionadas ao Model em questão
+ */
 @Service
 @NoArgsConstructor
 public class ExampleAdapter extends DatabaseManager {

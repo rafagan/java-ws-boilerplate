@@ -13,6 +13,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 
+/**
+ * Exemplos simples de cada tipo de requisição suportadas pelo servidor
+ */
 @Api(value = "/hello", description = "Hello World Jersey2/JaxRS e Swagger, com os principais verbos HTTP")
 @Log4j2
 @Path("v1/hello")

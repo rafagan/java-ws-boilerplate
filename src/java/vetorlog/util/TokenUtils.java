@@ -10,6 +10,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Geração de tokens
+ */
 public class TokenUtils {
     /**
      * Default token generator token with 60 days validity

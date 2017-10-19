@@ -11,8 +11,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Funções auxiliadoras no processo de inicialização da aplicação
+ */
 @Log4j2
 public class ConfUtils {
+    /**
+     * Lê o nome do persistence-unit no persistence.xml para configurar as injeções de conexão ao banco de dados
+     * O nome do persistence-unit sempre deve seguir o padrão <EMETER_APP_DATABASE>_<EMETER_APP_ENVIRONMENT>
+     * Ex: mysql_local
+    */
     @SuppressWarnings("ConstantConditions")
     public static PersistenceContextType readDatabaseContextFromPersistenceXml() {
         try {

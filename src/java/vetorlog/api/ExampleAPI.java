@@ -19,6 +19,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Exemplos de requisições JaxRS mapeada, com documentação do Swagger e permissões de acesso
+ * Para mais informações sobre documentação do swagger, ver https://github.com/swagger-api/swagger-core/wiki/annotations
+ */
 @Api(
     value = "/example",
     description = "Exemplos de API mais complexos",

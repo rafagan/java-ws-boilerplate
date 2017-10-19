@@ -81,7 +81,8 @@ Os arquivos de configuração copiados (na maioria da pasta `src/conf` do projet
   - `settings.xml`: Configurações do Maven
   - `httpd.conf`: Configurações do Apache
   - `httpd-vhosts.conf`: Portas e caminhos para aonde o Apache irá rotear
-  - Pasta angular: Contém html das páginas de erro e configuração de rewire do Apache (`.htaccess`), customizável sem a necessidade de reiniciá-lo
+  - Pasta angular: Contém html das páginas de erro e configuração de rewire do Apache (`.htaccess`), customizável sem a necessidade de reiniciá-lo. 
+      Caso deseje configurar o rewire do Tomcat, efetuar configuração do rewrite.config (`src/resources/rewrite.config`) 
 
 * Dependências provided:
 

@@ -12,6 +12,9 @@ import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.util.*;
 
+/**
+ * Leitura dos arquivos de internacionalização (i18n: i<len(nternacionalizatio) = 18>n)
+ */
 @NoArgsConstructor
 public class I18nManager {
     /**
@@ -52,6 +55,11 @@ public class I18nManager {
 
     private ResourceBundle bundle;
 
+    /**
+     * Construtor que lê o bundle de internacionalização (ex: responses_en_US.properties)
+     * @param locale qual é o idioma e país, no formato <idioma>_<país>
+     * @param bundleName nome do bundle (ex: responses)
+     */
     public I18nManager(String locale, String bundleName) {
         if(locale == null)
             locale = "en_US";
@@ -79,6 +87,11 @@ public class I18nManager {
         this.bundle = ResourceBundle.getBundle(bundleName, new Locale(ss[0], ss[1]), new UTF8Control());
     }
 
+    /**
+     * Lê key do arquivo de internacionalização
+     * @param key nome da key
+     * @return string internacionalizada
+     */
     public String get(String key) {
         try {
             return bundle.getString(key);
@@ -89,6 +102,12 @@ public class I18nManager {
         }
     }
 
+    /**
+     * Lê key do arquivo de internacionalização
+     * @param key nome da key
+     * @param arguments dados anotados na string de internaciolização ({0}, {1}, ..., {n}) que devem ser substituídos
+     * @return string internacionalizada
+     */
     public String get(String key, Object... arguments) {
         return MessageFormat.format(this.get(key), arguments);
     }

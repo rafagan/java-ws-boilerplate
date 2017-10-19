@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Protótipo de id em String
+ */
 @Data
 @MappedSuperclass
 @EqualsAndHashCode(of = "id")

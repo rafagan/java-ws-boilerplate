@@ -5,6 +5,11 @@ import io.sentry.SentryClientFactory;
 import io.sentry.event.Event;
 import io.sentry.event.EventBuilder;
 
+/**
+ * Camada de comunicação direta com o Sentry (ver configuração em sentry.properties)
+ * O sistema atual também suporta integração do Sentry com o Log4J2 (ver log4j2.xml)
+ * Para mais informações, https://docs.sentry.io/clients/java/usage/
+ */
 public class SentryUtils {
     private SentryClient sentryClient;
 

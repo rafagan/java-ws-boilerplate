@@ -19,6 +19,13 @@ import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+/**
+ * Interceptor de autenticação
+ * Intercepta a requisição para identificar se o usuário possui permissão de acesso ao método
+ * Essas permissões envolvem acesso total (PermitAll), acesso bloqueado (DenyAll) e token autorizado
+ * Para que o token seja validado, é obrigatório que alguma permissão esteja associada ao método
+ * Os papéis (RolesAllowed) são validados no interceptor de autorização (AuthorizationInterceptor)
+ */
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationInterceptor implements ContainerRequestFilter {

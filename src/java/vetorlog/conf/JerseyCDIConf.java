@@ -15,6 +15,11 @@ import vetorlog.model.util.relational.*;
 
 import java.util.Set;
 
+/**
+ * Configuração das injeções de dependência do Jersey
+ * Injeções anotadas com @Service não requerem configuração, mas as com @Contract são necessárias
+ * Para mais informações, https://javaee.github.io/hk2/
+ */
 @Log4j2
 public class JerseyCDIConf extends AbstractBinder {
     @SneakyThrows

@@ -1,6 +1,5 @@
 package vetorlog.controller.prototype;
 
-import org.glassfish.jersey.server.ContainerRequest;
 import vetorlog.api.util.ResponseFactory;
 import vetorlog.manager.DatabaseManager;
 import vetorlog.manager.I18nManager;
@@ -12,6 +11,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 
+/**
+ * Prototype de Controller, com injeções de dependências mais comuns
+ */
 public class Controller {
     @Inject
     protected DatabaseManager dbManager;

@@ -12,6 +12,11 @@ import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
 import java.util.Objects;
 
+/**
+ * Interceptor de autorização
+ * Esta camada intercepta as chamadas ao contexto de segurança e retorna usuário logado e se possui um papel
+ * de acesso à requisição que está autorizado (ex: usuário, admin)
+ */
 @Data
 @AllArgsConstructor
 @Priority(Priorities.AUTHORIZATION)
@@ -35,10 +40,11 @@ public class AuthorizationInterceptor implements SecurityContext {
         if(isSuperUser)
             return true;
 
+        // Coloque os novos papéis (Roles) para serem validados aqui
         boolean allowed = false;
-        if(Objects.equals(RoleType.USER, methodRole))
+        if(Objects.equals(RoleType.USER.toLowerCase(), methodRole.toLowerCase()))
             allowed = user.getRole().isUser();
-        else if(Objects.equals(RoleType.ADMIN, methodRole))
+        else if(Objects.equals(RoleType.ADMIN.toLowerCase(), methodRole.toLowerCase()))
             allowed = user.getRole().isAdmin();
 
         return allowed;

@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO de erros, com dados adicionais
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

@@ -12,6 +12,10 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 
+/**
+ * Interceptor de erro 404
+ * No caso especial dos erros 404, redireciona a página para o HTML de erro
+ */
 @Provider
 public class NotFoundInterceptor implements ExceptionMapper<NotFoundException> {
     @Context

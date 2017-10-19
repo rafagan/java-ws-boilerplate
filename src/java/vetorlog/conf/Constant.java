@@ -10,18 +10,30 @@ import java.util.Set;
 
 import static vetorlog.util.ConfUtils.readDatabaseContextFromPersistenceXml;
 
+/**
+ * Constantes do projeto
+ * Todas as constantes do shell script devem ser lidas nesta classe, a fim de serem acessadas de forma mais
+ * centralizada e organizada, facilitando a codificação e depuração das mesmas
+ */
 @Log4j2
 public class Constant {
+    // Hash utilizado na geração de tokens
     public static final String SECRET = "k#r4uCZ#4fBhIKb05o#ezioLf4M0LqtWZ#iGKqtlOQAzJN0aNGfp3e#EG#m4Mv";
+    // Tamanho padrão das oaginações
     public static final String DEFAULT_PAGE_SIZE = "100";
-    public final static int SALT_ITERATION_NUMBER = 1000;
+    // Total de iterações de aumento de segurança do hash da senha (quanto maior, mais segura a senha, porém mais pesado o algoritmo)
+    public static final int SALT_ITERATION_NUMBER = 1000;
+    // Idiomas suportados pela camada de internacionalização
     public static final Set<String> SUPPORTED_LANGUAGES = new HashSet<>(Arrays.asList("pt", "en"));
+    // Países suportados pela camada de internacionalização
     public static final Set<String> SUPPORTED_COUNTRIES = new HashSet<>(Arrays.asList("BR", "US"));
 
+    // Strings de documentação dos retornos de erro no Swagger
     public static final String CODE_ERROR_400 = "An error has ocurred";
     public static final String CODE_ERROR_500 = "An internal error has ocurred";
     public static final String CODE_ERROR_401 = "Unauthorized access";
 
+    // Leitura das variáveis definidas no shell script de inicialização (mais informações no README.MD)
     public static final String EMETER_APP_DATABASE = initDatabaseName();
     public static final String EMETER_APP_ENVIRONMENT = initEnvironmentName();
     public static final EnvironmentType ENVIRONMENT = initEnvironment();

@@ -13,7 +13,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-
+/**
+ * Customiza serialização de datas para o formato yyyy-MM-dd'T'HH:mm:ssZ
+ */
 @Log4j2
 public class DateParser extends JsonSerializer<Date> {
     @Override

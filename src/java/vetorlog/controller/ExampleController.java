@@ -11,6 +11,11 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/**
+ * Exemplo de Controller
+ * Camada responsável por receber os dados da requisição devidamente desserializados, realizar as modificações no banco de dados
+ * e devolver o resultado apropriado à requisição. Aqui, deve-se enxergar claramente as regras de negócio do projeto
+ */
 @Service
 public class ExampleController extends Controller {
     @Inject

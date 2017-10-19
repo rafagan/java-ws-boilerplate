@@ -43,7 +43,6 @@ public class UserController extends Controller {
     public Response create(CreateUserDTO createUserDTO) {
         String passwordHash = PasswordUtils.generateHashPassword(createUserDTO.getPassword(), null);
 
-        // TODO: Validação automática no JSON, possibilidade de mapeamento mais facilitada
         UserModel model = new UserModel();
         model.setName(createUserDTO.getName());
         model.setEmail(createUserDTO.getEmail());

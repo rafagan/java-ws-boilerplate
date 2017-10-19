@@ -1,6 +1,5 @@
 package vetorlog.api.interceptor;
 
-
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -13,7 +12,14 @@ import java.io.IOException;
 
 import static com.google.common.net.HttpHeaders.*;
 
-@SuppressWarnings("ALL")
+/**
+ * Configurações de CORS
+ * Este interceptor é responsável por injetar na respota os headers de Cross-origin resource sharing, o qual permite
+ * que o browser aceite respostas do servidor em IPs de origem que não correspondem exatamente ao mesmo domínio do
+ * servidor
+ * Para mais informações sobre o conceito, visitar https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+ * Favor não criar outros filtros de CORS além desse (ex: no Tomcat ou Apache)
+ */
 @Provider
 @Priority(1)
 public class CorsInterceptor implements ContainerResponseFilter {

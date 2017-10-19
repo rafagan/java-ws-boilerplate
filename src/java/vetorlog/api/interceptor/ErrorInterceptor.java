@@ -11,6 +11,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * Interceptor de erros
+ * Responsável por capturar retornos de erro da camada JAXRS e realizar o log ao sentry e retornos apropriados
+ */
 @Provider
 @Log4j2
 public class ErrorInterceptor implements ExceptionMapper<Exception> {

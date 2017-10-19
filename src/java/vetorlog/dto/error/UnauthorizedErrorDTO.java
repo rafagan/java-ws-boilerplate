@@ -4,6 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO de erros 401
+ * Se critical é verdadeiro, então deve-se deslogar o usuário do app
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

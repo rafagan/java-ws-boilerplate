@@ -12,6 +12,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Respostas às requisições
+ * Customize os retornos possíveis nos switches do header Accept: switch (accept)
+ */
 @Service
 public class ResponseFactory {
     @Context

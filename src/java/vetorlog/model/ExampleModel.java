@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * Exemplo de mapeamento objeto relacional, utilizando JPA
+ */
 @Entity
 @Table(name="ExampleTable")
 @Data
