@@ -50,7 +50,7 @@
     </properties>
 
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>econometer</finalName>
         <sourceDirectory>src/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
@@ -96,7 +96,7 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webappDirectory>src/webapp</webappDirectory>
-                    <warName>ROOT</warName>
+                    <warName>econometer</warName>
                 </configuration>
                 <executions>
                     <execution>

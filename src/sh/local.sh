@@ -11,7 +11,7 @@ export SENTRY_DSN='https://1b55d22eb65b4ec9959eaffe8e63dc11:ec0b6b50c51547fdaac1
 # Caminhos
 PROJECT='/Users/rafagan/Desktop/Dropbox/Guizion_Dev/Vetorlog/new_econometer/src';
 WEBDIST='/var/www/econometer.com/public_html'
-TOMCAT='/usr/local/Cellar/tomcat/8.5.20/libexec';
+TOMCAT='/usr/local/Cellar/tomcat/8.5.24/libexec';
 MAVEN='/usr/local/Cellar/maven/3.5.0/libexec/conf';
 APACHE='/private/etc/apache2';
 
