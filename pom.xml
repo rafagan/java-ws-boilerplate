@@ -50,6 +50,7 @@
     </properties>
 
     <build>
+        <finalName>ROOT</finalName>
         <sourceDirectory>src/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
@@ -95,6 +96,7 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webappDirectory>src/webapp</webappDirectory>
+                    <warName>ROOT</warName>
                 </configuration>
                 <executions>
                     <execution>

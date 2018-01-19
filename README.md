@@ -35,7 +35,7 @@ Ele serve apenas para consulta na fase de desenvolvimento.
 
 ### URLs de acesso ###
 
-* index.html do tomcat: `http://<url>/:8080` ou `http://<url>/java` (via apache)
+* index.html do tomcat: `http://<url>:8080` ou `http://<url>/java` (via apache)
 * Manager Tomcat 8: `http://<url>/:8080/manager`
   * Login: `vetorlog`
   * Senha: `abcd@1234`
