@@ -1,6 +1,7 @@
 package vetorlog.conf;
 
 import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import vetorlog.util.type.EnvironmentType;
 import vetorlog.util.type.PersistenceContextType;
 
@@ -61,7 +62,7 @@ public class Constant {
             log.warn("EMETER_APP_ENVIRONMENT is not set, please run the commands from one of the shell scripts " +
                     "to set appropriately the environment variables. See README.md for more details.");
         }
-        return null;
+        return EnvironmentType.UNDEFINED;
     }
 
     private static String initAppUrl() {
